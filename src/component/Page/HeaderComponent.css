@@ -1,0 +1,54 @@
+.navbar{
+    background: rgb(235, 194, 105);
+}
+.navbar-brand{
+    color: white
+}
+.navbar-nav{
+    color: white;
+} */
+#logo {
+    height: 120px;
+    width: auto;
+}
+.nav-link{
+    color:tomato;
+}
+.nav-link:hover{
+    color: white;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color: #FFFF00;
+    color: #FFC0CB;
+}
+.button{
+ background-color: #060a06; /* Green */
+ width: 13em;
+ height: 4em;
+ font-size: 13px;
+  border: rgb(190, 42, 42);
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  /* cursor: pointer; */
+} 
+.button1 {
+    background-color: transparent;
+    color:white;
+    border: 2px solid white;
+
+  }
+  
+  .button1:hover {
+    background-color: #090a09;
+    color: orangered;
+  }
+
+  #bookNow {
+    margin-top: 200px;
+  }

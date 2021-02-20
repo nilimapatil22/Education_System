@@ -1,0 +1,20 @@
+h1 {
+    text-align: center;
+    color:tomato;
+}
+.mainpage{
+  
+    background-image: url('./bg2.jpg');
+    background-repeat: no-repeat, repeat;
+    background-size: cover; 
+    height: 500px;
+
+}
+.payment{
+  
+    background-color: #b8d8f1;
+    background-repeat: no-repeat, repeat;
+    background-size: cover; 
+    height: 500px;
+
+}
