@@ -22,7 +22,10 @@ export default class Login extends Component {
 
         <div className="form-group">
             <label>Role Type(student/admin)</label>
-            <input type="text" className="form-control" placeholder="Enter role Type" />
+            <select>
+                <option name="admin" value="admin">Admin</option>
+                <option name="student" value="student">Student</option>
+            </select>
         </div>
 <div className="text-center">
         <button type="submit" className="btn btn-primary btn-lg">Login</button><br></br>
