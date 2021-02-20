@@ -27,7 +27,7 @@ export default class Login extends Component {
                 <option name="student" value="student">Student</option>
             </select>
         </div>
-<div className="text-center">
+        <div className="text-center">
         <button type="submit" className="btn btn-primary btn-lg">Login</button><br></br>
         <i>You dont have account?<a href="/register">SignUp</a></i></div>
 
