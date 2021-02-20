@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import Home from './Home';
 import axios from 'axios';
-class ViewCourse extends Component {
+class EnrollCourse extends Component {
     constructor(props)
     {
     super(props); 
     this.state={AllCourseData:[],errMsg:""}
-    console.log("In  ShowAllCourseComponent constructor executed"); 
+    console.log("In EnrollCourse constructor executed"); 
     }
     componentDidMount(){
-        console.log("In  ShowAllEmpComponent componentDidMount executed");
+        console.log("In  Enroll componentDidMount executed");
         axios.get("http://localhost:7171/api/getAllCourses")
     .then(
            (responseData)=>{
@@ -37,26 +38,15 @@ class ViewCourse extends Component {
                    <td>COURSE_ENROLL</td>
                 </tr>
                 </thead>
-                <tbody>
-                {this.state.AllCourseData.map(function(course, key){
+               <tbody>
+            {this.state.AllCourseData.map(function(course, key){
                 return (
                     <tr key={key}>
                         <td>{course.courseId}</td>
                         <td>{course.courseName}</td>
                         <td>{course.fee}</td>
                         <td>{course.duration}</td>
-                        <td>
-                            <Link 
-                                className="btn btn-primary mr-2"
-                                       to={"/"}>View</Link>
-                           <Link 
-                           className="btn btn-primary mr-2" 
-                                      to={"/updateCourse"}>Modify </Link>
-
-                          <Link
-                           className="btn btn-danger"
-                                     to={"/"}>Delete</Link>
-                     </td>
+                        <td><Link to={`/chooseCourse/${course.courseId}`}>Enroll</Link></td>
                     </tr>
                 )
             })}
@@ -67,4 +57,4 @@ class ViewCourse extends Component {
     }
 }
 
-export default ViewCourse
+export default EnrollCourse
