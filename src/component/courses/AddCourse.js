@@ -1,70 +1,119 @@
 import axios from 'axios';
-import React from 'react';
+import React, { Component } from 'react'
 
-class AddCourse extends React.Component{
-    constructor(props)
-    {
-        super(props);
-        this.state={
-            courseName:"",
-            courseFee:"",
-            courseDuration:"",
-            courseObj:{ "courseId": 0, "courseName": "", "courseFee": "", "courseDuration":""}
-        };
-        this.handleChange=this.handleChange.bind(this);
-        this.handleSubmit=this.handleSubmit.bind(this);
-
+ class AddCourse extends Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+        courseId:"",
+        courseName:"",
+        fee:"",
+        duration:"",
+        adminId:"",
+         }
+         this.registerCourse=this.registerCourse.bind(this);
     }
-    // handleChange(event)
-    // {
-    //     const {name, value, type, checked}=event.target;
-    //     if(type==="checkbox")
-    //     {
-    //         this.setState({[name]:event.target.checked})
-    //     }
-    //     else{
-    //         console.log("......"+[event.target.name]);
-    //         this.setState({[event.target.name]:event.target.value});
-    //     }
 
+    registerCourse=async(e)=>{
+      e.preventDefault()
+      let courseDetails={
+        courseId:this.state.courseId,
+        courseName:this.state.courseName,
+        fee:this.state.fee,
+        duration:this.state.duration,
+        adminId:this.state.adminId
+      }
+      console.log("Coursedata="+JSON.stringify(courseDetails))
 
-    // }
-    handleSubmit(event)
-    {
-        let tempCourseObj={"courseId":this.state.courseId,
-                         "courseName":this.state.courseName,
-                          "courseFee":this.state.courseFee,
-                          "courseDuration":this.state.courseDuration
-                        }
-            console.log("u entered....."+tempCourseObj);
+      await axios.post("http://localhost:7171/api/Course",courseDetails)
+      .then((responseData)=>{
+      })
+    this.props.history.push('/course');
+  }
+  cancel(){
+    this.props.history.push('/login');
+  }
+    
+    render() {
+        return (
+            <div>
+                <form onSubmit={this.registerCourse}>
 
+                <h1 className="text-center">
+                  <span className="badge badge-dark">Course Register</span>
+                </h1>
+                <div className="form-group mr2">
+                  <div className="alert-danger">{this.state.courseNameError}</div>
+                  <label>Course Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="courseName"
+                    placeholder="Enter Course Name"
+                    value={this.state.courseName}
+                    onChange={(event) =>
+                      this.setState({ courseName: event.target.value })
+                    }
+                  />
+                </div>
+                <div className="form-group">
+                  <div className="alert-danger">{this.state.feeError}</div>
+                  <label>Course Fee</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="fee"
+                    placeholder="Enter Fee"
+                    value={this.state.fee}
+                    onChange={(event) =>
+                      this.setState({ fee: event.target.value })
+                    }
+                  />
+                </div>
 
-            axios.post("http://localhost:7171/api/Course", tempCourseObj)
-            .then(
-                (responseData)=>{console.log("Data added"+responseData.data.message)}
-            )
-            .catch((errorData)=>{console.log("Error while adding")})
+                <div className="form-group">
+                  <div className="alert-danger">{this.state.durationError}</div>
+                  <label>Course Duration</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="duration"
+                    placeholder="Enter Duration"
+                    value={this.state.duration}
+                    onChange={(event) =>
+                      this.setState({ duration: event.target.value })
+                    }
+                  />
+                </div>
 
-    }
-    render()
-    {
-        return(<div>
-            <h4>Enter Course details here</h4>
-            <form onSubmit={this.handleSubmit}>
+                <div className="form-group">
+                  <div className="alert-danger">{this.state.adminIdError}</div>
+                  <label>Admin Id</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="adminId"
+                    placeholder="Enter Admin Id"
+                    value={this.state.adminId}
+                    onChange={(event) =>
+                      this.setState({ adminId: event.target.value })
+                    }
+                  />
+                </div>
 
-               Course Name :<input type="text" name="courseName" 
-                       onChange={this.handleChange}/><br />
-
-                Course Fee :<input type="text" name="courseFee" 
-                        onChange={this.handleChange}/><br />
-
-                Course Duration<input type="text" name="courseDuration"
-                         onChange={this.handleChange}/><br />
-
-                <button type="submit">Add Course</button>
+               
+                <div className="text-center"> 
                 
-            </form>
-        </div>);
+                  <button type="submit" className="btn btn-primary"
+                  onClick={this.registerCourse}>
+                  Register
+                  </button>
+                </div>
+               
+              </form>
+            </div>
+        )
     }
 }
 export default AddCourse

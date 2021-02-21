@@ -17,7 +17,7 @@ class ChooseCourse extends React.Component{
     componentDidMount()
     {
         console.log(`${this.props.match.params.id}`)
-        axios.get(`http://localhost:7171/api/chooseCourse/${this.props.match.params.id}`)
+        axios.get(`http://localhost:7171/api/getCourse/${this.props.match.params.id}`)
         .then(
             (response)=>{
                 console.log("Fetch data"+response.data);

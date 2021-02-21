@@ -1,70 +1,63 @@
-import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
+import { NavLink, Link } from "react-router-dom";
 class ViewCourse extends Component {
-    constructor(props)
-    {
-    super(props); 
-    this.state={AllCourseData:[],errMsg:""}
-    console.log("In  ShowAllCourseComponent constructor executed"); 
+  state = {
+    course: {
+    
     }
-    componentDidMount(){
-        console.log("In  ShowAllEmpComponent componentDidMount executed");
-        axios.get("http://localhost:7171/api/getAllCourses")
-    .then(
-           (responseData)=>{
-           console.log(" Retrived from json "+responseData.data);
-           this.setState({AllCourseData:responseData.data});
-         } 
-    )
-    .catch(
-            (errorResponce)=>{ 
-            console.log(" Error in Fetching the data "+
-            errorResponce);}
-        );
-    }
-    render() {
-        return (
-                <div>
-                <h2><center>***Course Data***</center></h2>
-                <table border="2">
-                <thead>
-                <tr>
-                   <td>COURSE_ID</td>
-                   <td>COURSE_NAME</td>
-                   <td>COURSE_FEE</td>
-                   <td>COURSE_DURATION</td>
-                   <td>COURSE_ENROLL</td>
-                </tr>
-                </thead>
-                <tbody>
-                {this.state.AllCourseData.map(function(course, key){
-                return (
-                    <tr key={key}>
-                        <td>{course.courseId}</td>
-                        <td>{course.courseName}</td>
-                        <td>{course.fee}</td>
-                        <td>{course.duration}</td>
-                        <td>
-                            <Link 
-                                className="btn btn-primary mr-2"
-                                       to={"/"}>View</Link>
-                           <Link 
-                           className="btn btn-primary mr-2" 
-                                      to={"/updateCourse"}>Modify </Link>
+  };
+  componentDidMount() {
+     axios
+       .get(
+         `http://localhost:7171/api/getCourse/${this.props.match.params.courseId}`
+       )
+       .then((result) => {
+         this.setState({
+          course: result.data,
+         });
+       });
+   }
 
-                          <Link
-                           className="btn btn-danger"
-                                     to={"/"}>Delete</Link>
-                     </td>
-                    </tr>
-                )
-            })}
-        </tbody>
-    </table>
-</div>
-        )
-    }
+  render() {
+    return (
+      <div>
+        <h1>
+          <span className="badge badge-dark">View Course</span>
+        </h1>
+        <div className = "row">
+                    <Link 
+                        className="btn btn-primary mr-2"
+                         to={"/listofcourse"}>Go Back
+                    </Link>                 
+                </div>
+
+        <table className="table table-bordered">
+          <tr>
+            <td>Course Id</td>
+            <th>{this.state.course.courseId}</th>
+          </tr>
+          <tr>
+            <td>Course Name</td>
+            <th>{this.state.course.courseName}</th>
+          </tr>
+          <tr>
+            <td>Course Fee</td>
+            <th>{this.state.course.fee}</th>
+          </tr>
+          <tr>
+            <td>Course Duration</td>
+            <th>{this.state.course.duration}</th>
+          </tr>
+          
+        </table>
+      </div>
+    );
+  }
 }
 
-export default ViewCourse
+export default ViewCourse;
+
+
+
+

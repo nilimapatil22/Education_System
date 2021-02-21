@@ -12,6 +12,10 @@ import AddPayment from './payments/AddPayment';
 import ChooseCourse from './courses/ChooseCourse';
 import ViewCourse from './courses/ViewCourse';
 import ViewTrainer from './trainers/ViewTrainer';
+import ListOfAllCourses from './courses/ListOfAllCourses';
+import ListOfTrainer from './trainers/ListOfTrainer';
+import AddCourse from './courses/AddCourse';
+import AddTrainer from './trainers/AddTrainer';
 
  class Home extends Component {
     render() {
@@ -26,10 +30,14 @@ import ViewTrainer from './trainers/ViewTrainer';
              <Route exact path="/login/enroll/payment/" component={AddPayment}></Route>
              {/* <Route exact path="/login/enroll/payment/course" component={AddCourse}></Route> */}
              <Route exact path="/enrollcourse" component={EnrollCourse}></Route>
-             <Route exact path="/chooseCourse/:id" component={ChooseCourse}></Route>
+             <Route exact path="/chooseCourse/:courseId" component={ChooseCourse}></Route>
              <Route exact path ="/viewCourse" component={ViewCourse}></Route>
-             <Route exact path="./viewTrainer" component={ViewTrainer}></Route>
-             <Route></Route>
+             <Route exact path="/viewTrainer/:trainerId" component={ViewTrainer}></Route>
+             <Route exact path="/listofcourse" component={ListOfAllCourses}></Route>
+             <Route exact path="/viewcourse/:courseId" component={ViewCourse}></Route>
+             <Route exact path="/listoftrainer" component={ListOfTrainer}></Route>
+             <Route exact path="/addcourse" component={AddCourse}></Route>
+             <Route exact path="/addtrainer" component={AddTrainer}></Route>
             </Router>
           </div>
         )
