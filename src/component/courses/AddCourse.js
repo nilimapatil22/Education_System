@@ -1,46 +1,139 @@
+import axios from 'axios';
 import React, { Component } from 'react'
 
-export default class AddCourse extends Component {
+ class AddCourse extends Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+        courseId:"",
+        courseName:"",
+        fee:"",
+        duration:"",
+        adminId:"",
+         }
+         this.registerCourse=this.registerCourse.bind(this);
+    }
+
+    registerCourse=async(e)=>{
+      e.preventDefault()
+      let courseDetails={
+        courseId:this.state.courseId,
+        courseName:this.state.courseName,
+        fee:this.state.fee,
+        duration:this.state.duration,
+        adminId:this.state.adminId
+      }
+      console.log("Coursedata="+JSON.stringify(courseDetails))
+
+      await axios.post("http://localhost:7171/api/Course",courseDetails)
+      .then((responseData)=>{
+      })
+
+    this.props.history.push('/listofcourse');
+  }
+  cancel(){
+    this.props.history.push('/listofcourse');
+
+    this.props.history.push('/course');
+  }
+  cancel(){
+    this.props.history.push('/login');
+
+  }
+    
     render() {
         return (
-            <div className="payment">
-                <form>
             <div>
-                    <h1>Enroll To Course</h1>
-                <div className="root-div"><br/>
-                  
+                <form onSubmit={this.registerCourse}>
 
-                    <div className="mb-3 add-course">
-                        <input type="text"  className="form-control" id="courseName" placeholder="Course Name" />
-                    </div>
+                <h1 className="text-center">
+                  <span className="badge badge-dark">Course Register</span>
+                </h1>
+                <div className="form-group mr2">
+                  <div className="alert-danger">{this.state.courseNameError}</div>
+                  <label>Course Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="courseName"
+                    placeholder="Enter Course Name"
+                    value={this.state.courseName}
+                    onChange={(event) =>
+                      this.setState({ courseName: event.target.value })
+                    }
+                  />
+                </div>
+                <div className="form-group">
+                  <div className="alert-danger">{this.state.feeError}</div>
 
-                    <div className="mb-3 add-course">
-                        <input type="number"  className="form-control" id="coursefee" placeholder="Course fee" />
-                    </div>
+                  <label>Course Fee(INR)</label>
 
-                    <div className="mb-3 add-course">
-                        <input type="number"  className="form-control" id="courseduration" placeholder="Course Duration" />
-                    </div>
+                  <label>Course Fee</label>
 
-                    <div className="mb-3 add-course">
-                        <input type="number"  className="form-control" id="adminid" placeholder="Admin ID" />
-                    </div>
-
-                   <button type="button"  className="btn btn-primary add-button">Enroll</button><i>          </i>
-                    <button type="button"  className="btn btn-primary add-button">Change Course</button>
-                    <form method="get" action="/login/enroll"><button type="submit" className="btn btn-primary float-right">
-                          Back
-                    </button></form>
-                    
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="fee"
+                    placeholder="Enter Fee"
+                    value={this.state.fee}
+                    onChange={(event) =>
+                      this.setState({ fee: event.target.value })
+                    }
+                  />
                 </div>
 
-                <div className={(this.props.returnedMessage === '') ? '' : "alert "} role="alert">
-                    {this.props.returnedMessage}
+                <div className="form-group">
+                  <div className="alert-danger">{this.state.durationError}</div>
+
+                  <label>Course Duration(days)</label>
+
+                  <label>Course Duration</label>
+
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="duration"
+                    placeholder="Enter Duration"
+                    value={this.state.duration}
+                    onChange={(event) =>
+                      this.setState({ duration: event.target.value })
+                    }
+                  />
                 </div>
 
-            </div>
-            </form>
+                <div className="form-group">
+                  <div className="alert-danger">{this.state.adminIdError}</div>
+                  <label>Admin Id</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="adminId"
+                    placeholder="Enter Admin Id"
+                    value={this.state.adminId}
+                    onChange={(event) =>
+                      this.setState({ adminId: event.target.value })
+                    }
+                  />
+                </div>
+
+               
+                <div className="text-center"> 
+                
+                  <button type="submit" className="btn btn-primary"
+                  onClick={this.registerCourse}>
+                  Register
+                  </button>
+
+                  <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>
+                    Cancel
+                  </button>
+
+                </div>
+               
+              </form>
             </div>
         )
     }
 }
+export default AddCourse

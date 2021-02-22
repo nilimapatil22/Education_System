@@ -1,62 +1,61 @@
 import React, { Component } from "react";
 import axios from "axios";
-class ViewPayment extends React.Component {
+import { NavLink, Link } from "react-router-dom";
+class ViewPayment extends Component {
   state = {
-  
-     paymentData:[]
-  }
-
-  componentDidMount() {
-    axios
-      .get(
-        `http://localhost:7171/api/getAllPayment`
-      )
-      .then((result) => {
-        this.setState({
-          paymentData: result.data,
-        });
-      });
-  }
-
-  homePage = (event) => {
-    // event.preventDefault();
-    // alert("send to home page");
-    this.props.history.push("/getAllPayment");
+    payment: {}
+    
   };
+   componentDidMount() {
+     axios
+       .get(
+         `http://localhost:7171/api/getmyPayment/${this.props.match.params.paymentId}`
+       )
+       .then((result) => {
+         this.setState({
+            payment: result.data,
+         });
+       });
+   }
+
+
   render() {
     return (
       <div>
         <h1>
-          <span className="badge badge-dark">View Payment</span>
+          <span className="badge badge-dark"> Payment Details</span>
         </h1>
+        <div className = "row">  
+            <Link 
+                className="btn btn-primary mr-2" align ="right" to={"/login/listofpayment"}>Go Back
+            </Link>              
+        </div>
         <table className="table table-bordered">
           <tr>
             <td>Payment Id</td>
-            <th>{this.state.paymentData.paymentId}</th>
+            <th>{this.state.payment.paymentId}</th>
           </tr>
           <tr>
-            <td>Payment amount</td>
-            <th>{this.state.paymentData.amount}</th>
+            <td>Amount</td>
+            <th>{this.state.payment.fee}</th>
           </tr>
           <tr>
             <td>Payment Status</td>
-            <th>{this.state.paymentData.paymentStatus}</th>
+            <th>{this.state.payment.paymentStatus}</th>
           </tr>
           <tr>
             <td>Payment Type</td>
-            <th>{this.state.paymentData.paymentType}</th>
+            <th>{this.state.payment.paymentType}</th>
           </tr>
+         
           <tr>
-            <td>Student ID</td>
-            <th>{this.state.paymentData.studentId}</th>
+            <td>Student Id</td>
+            <th>{this.state.payment.studentId}</th>
           </tr>
+
         </table>
 
-        <div className="form-group">
-          <button className="btn btn-primary" onClick={this.homePage}>
-            Go Back
-          </button>
-        </div>
+       
       </div>
     );
   }
