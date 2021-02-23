@@ -10,8 +10,12 @@ import React, { Component } from 'react'
         trainerName:"",
         phoneNo:"",
         email:"",
+
         courseName:"",
         adminId:""
+
+        adminId:"",
+
          }
          this.registerTrainer=this.registerTrainer.bind(this);
     }
@@ -23,7 +27,9 @@ import React, { Component } from 'react'
         trainerName:this.state.trainerName,
         phoneNo:this.state.phoneNo,
         email:this.state.email,
+
         courseName:this.state.courseName,
+
         adminId:this.state.adminId
       }
       console.log("Trainerdata="+JSON.stringify(trainerDetails))
@@ -31,10 +37,17 @@ import React, { Component } from 'react'
       await axios.post("http://localhost:7171/api/addTrainer",trainerDetails)
       .then((responseData)=>{
       })
+
     this.props.history.push('/listoftrainer');
   }
   cancel(){
     this.props.history.push('/listoftrainer');
+
+    this.props.history.push('/trainer');
+  }
+  cancel(){
+    this.props.history.push('/login');
+
   }
     
     render() {
@@ -90,6 +103,7 @@ import React, { Component } from 'react'
                 </div>
 
                 <div className="form-group">
+
                   <div className="alert-danger">{this.state.courseNameError}</div>
                   <label>Course Name</label>
                   <input
@@ -105,6 +119,7 @@ import React, { Component } from 'react'
                 </div>
 
                 <div className="form-group">
+
                   <div className="alert-danger">{this.state.adminIdError}</div>
                   <label>Admin Id</label>
                   <input
@@ -126,9 +141,11 @@ import React, { Component } from 'react'
                   onClick={this.registerTrainer}>
                   Register
                   </button>
+
                   <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>
                     Cancel
                   </button>
+
                 </div>
                
               </form>

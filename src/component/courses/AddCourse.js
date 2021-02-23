@@ -29,10 +29,17 @@ import React, { Component } from 'react'
       await axios.post("http://localhost:7171/api/Course",courseDetails)
       .then((responseData)=>{
       })
+
     this.props.history.push('/listofcourse');
   }
   cancel(){
     this.props.history.push('/listofcourse');
+
+    this.props.history.push('/course');
+  }
+  cancel(){
+    this.props.history.push('/login');
+
   }
     
     render() {
@@ -59,7 +66,11 @@ import React, { Component } from 'react'
                 </div>
                 <div className="form-group">
                   <div className="alert-danger">{this.state.feeError}</div>
+
                   <label>Course Fee(INR)</label>
+
+                  <label>Course Fee</label>
+
                   <input
                     type="number"
                     className="form-control"
@@ -74,7 +85,11 @@ import React, { Component } from 'react'
 
                 <div className="form-group">
                   <div className="alert-danger">{this.state.durationError}</div>
+
                   <label>Course Duration(days)</label>
+
+                  <label>Course Duration</label>
+
                   <input
                     type="number"
                     className="form-control"
@@ -109,9 +124,11 @@ import React, { Component } from 'react'
                   onClick={this.registerCourse}>
                   Register
                   </button>
+
                   <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>
                     Cancel
                   </button>
+
                 </div>
                
               </form>

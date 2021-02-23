@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+
+import Home from './Home';
+
 import axios from 'axios';
 class EnrollCourse extends Component {
     constructor(props)
@@ -45,7 +48,11 @@ class EnrollCourse extends Component {
                         <td>{course.courseName}</td>
                         <td>{course.fee}</td>
                         <td>{course.duration}</td>
+
                         <td><Link to={`/choosecourse/${course.courseId}`}>Enroll</Link></td>
+
+                        <td><Link to={`/chooseCourse/${course.courseId}`}>Enroll</Link></td>
+
                     </tr>
                 )
             })}

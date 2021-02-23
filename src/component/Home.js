@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import AddCourse from './courses/AddCourse';
+import EnrollCourse from './courses/EnrollCourse';
 import Navbar from './layout/Navbar';
 import About from './Page/About'
 import Contact from './Page/Contact'
@@ -43,6 +43,7 @@ import ViewPaymentStudent from './payments/ViewPaymentStudent';
 import ListOfPayment from './payments/ListOfPayment';
 import ListOfPaymentStudent from './payments/ListOfPaymentStudent';
 import AddPayment from './payments/AddPayment';
+
 import StudentProgressView from './progress details/StudentProgressView';
 import ViewProgressDetails from './progress details/ViewProgressDetails';
 import DetailviewProgress from './progress details/DetailViewProgress';
@@ -60,10 +61,19 @@ import UpdateStudent from './users/UpdateStudent';
 import DeleteStudent from './users/DeleteStudent';
 import DeleteAdmin from './users/DeleteAdmin';
 
+import ChooseCourse from './courses/ChooseCourse';
+import ViewCourse from './courses/ViewCourse';
+import ViewTrainer from './trainers/ViewTrainer';
+import ListOfAllCourses from './courses/ListOfAllCourses';
+import ListOfTrainer from './trainers/ListOfTrainer';
+import AddCourse from './courses/AddCourse';
+import AddTrainer from './trainers/AddTrainer';
+
+
  class Home extends Component {
     render() {
         return (
-            <div className="container">
+            <div className="payment">
             <Router>
               <Navbar/>
               <Route exact path="/" component={Welcome}></Route>
@@ -115,6 +125,7 @@ import DeleteAdmin from './users/DeleteAdmin';
              <Route exact path ="/viewpreviousprogress" component={PreviousProgressDetails}></Route>
 
              
+
              <Route exact path="/login/trainingschedulestudent" component={ListOfScheduleStudent}></Route>
              <Route exact path ="/login/trainingschedule" component={ListOfTrainingSchedule}></Route>
              <Route exact path="/trainingschedule/modifyschedule/:scheduleId" component={UpdateTrainingSchedule}></Route>
@@ -132,6 +143,22 @@ import DeleteAdmin from './users/DeleteAdmin';
              <Route exact path="/message/removemessage/:messageId" component={DeleteMessage}></Route>
             <Route exact path = "/messages/modifymessage/:messageId" component={UpdateMessage}></Route>
 
+
+
+              <Route exact path="/" component={Login}></Route>
+              <Route exact path="/register" component={Registration}></Route>
+             <Route exact path="/login/enroll" component={MainPage}></Route>
+             <Route exact path="/login/enroll/payment/" component={AddPayment}></Route>
+             {/* <Route exact path="/login/enroll/payment/course" component={AddCourse}></Route> */}
+             <Route exact path="/enrollcourse" component={EnrollCourse}></Route>
+             <Route exact path="/chooseCourse/:courseId" component={ChooseCourse}></Route>
+             <Route exact path ="/viewCourse" component={ViewCourse}></Route>
+             <Route exact path="/viewTrainer/:trainerId" component={ViewTrainer}></Route>
+             <Route exact path="/listofcourse" component={ListOfAllCourses}></Route>
+             <Route exact path="/viewcourse/:courseId" component={ViewCourse}></Route>
+             <Route exact path="/listoftrainer" component={ListOfTrainer}></Route>
+             <Route exact path="/addcourse" component={AddCourse}></Route>
+             <Route exact path="/addtrainer" component={AddTrainer}></Route>
 
             </Router>
           </div>

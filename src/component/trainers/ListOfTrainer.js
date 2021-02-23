@@ -33,6 +33,7 @@ class ListOfTrainer extends Component {
                  <h2 className="text-center">List of All Course</h2>
                  <br></br>
                  <div className = "row">
+
                  <Link 
                         className="btn btn-primary mr-2"
                          to={"/registertrainer"}>Add Trainer
@@ -40,6 +41,11 @@ class ListOfTrainer extends Component {
                     <Link 
                         className="btn btn-primary mr-2"
                          to={"/login/mainpageadmin"}>Go Back
+
+                    <Link 
+                        className="btn btn-primary mr-2"
+                         to={"/login/enroll"}>Go Back
+
                     </Link>                 
                 </div>
                  <div className = "row">
@@ -72,6 +78,7 @@ class ListOfTrainer extends Component {
 
                                                 <Link 
                                                     className="btn btn-primary mr-2" 
+
                                                     to={`/modifytrainer/${trainer.trainerId}`}>Modify
                                                 </Link>
 {/* 
@@ -79,6 +86,15 @@ class ListOfTrainer extends Component {
                                                     className="btn btn-danger"
                                                     to={`/removetrainer/${trainer.trainerId}`}>Remove
                                                 </Link> */}
+
+                                                    to={"/updatetrainer"}>Modify
+                                                </Link>
+
+                                               <Link
+                                                    className="btn btn-danger"
+                                                    to={"/"}>Delete
+                                                </Link>
+
                  
                                              </td>
                                             </tr>
