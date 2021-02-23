@@ -42,11 +42,11 @@ class ViewCourse extends Component {
             <th>{this.state.course.courseName}</th>
           </tr>
           <tr>
-            <td>Course Fee</td>
+            <td>Course Fee (INR)</td>
             <th>{this.state.course.fee}</th>
           </tr>
           <tr>
-            <td>Course Duration</td>
+            <td>Course Duration (Days)</td>
             <th>{this.state.course.duration}</th>
           </tr>
           

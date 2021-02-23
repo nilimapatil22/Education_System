@@ -10,43 +10,102 @@ import React, { Component } from 'react'
         trainerName:"",
         phoneNo:"",
         email:"",
-
         courseName:"",
-        adminId:""
-
+        // adminId:"",
+        trainerIdError:"",
+        trainerNameError:"",
+        phoneNoError:"",
+        emailError:"",
+        courseNameError:""
+        // adminIdError:""
 
          }
          this.registerTrainer=this.registerTrainer.bind(this);
     }
 
+    validate = () => {
+      let flag = true;
+
+      //validation of trainer name
+      if(this.state.trainerName===""){
+        flag=false;
+         this.setState({trainerNameError:"trainer's first Name is required"});
+       } 
+       else if(!/[A-Z]{1}[a-z]/.test(this.state.trainerName)){
+        this.setState({trainerNameError:"first letter should be capital"})
+      }
+       else{
+         this.setState({trainerNameError:""});
+      }
+
+      //validation of trainer phone no
+      if (this.state.phoneNo==="") {
+        flag = false;
+        this.setState({ phoneNoError: "phoneNo Is Required" });
+      } 
+      else if(!/(7|8|9)\d{9}/.test(this.state.phoneNo)){
+        this.setState({phoneNoError:"Phone number contain 10 digits"})
+      }
+      else {
+        this.setState({ phoneNoError: "" });
+      }
+
+      //validation of email
+      if (this.state.email==="") {
+        flag = false;
+        this.setState({ emailError: "Email is required" });
+      } 
+      else if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.state.email)){
+        this.setState({emailError:"Email should be in proper format"})
+      }      
+      else {
+        this.setState({ email: "" });
+      }
+
+      //validation of course name
+      if (this.state.courseName==="") {
+        flag = false;
+        this.setState({ courseNameError: "courseName is required" });
+      } else {
+        this.setState({ courseName: "" });
+      }
+
+      // //validation of adminId
+      // if (this.state.adminId==="") {
+      //   flag = false;
+      //   this.setState({ adminIdError: "adminId is required" });
+      // } else {
+      //   this.setState({ adminId: "" });
+      // }
+
+      return flag;
+    };
+
     registerTrainer=async(e)=>{
-      e.preventDefault()
+      e.preventDefault();
+
+      let isValid = this.validate();
+      if (!isValid) {
+        return false;
+      }
+      
       let trainerDetails={
         trainerId:this.state.trainerId,
         trainerName:this.state.trainerName,
         phoneNo:this.state.phoneNo,
         email:this.state.email,
-
-        courseName:this.state.courseName,
-
-        adminId:this.state.adminId
+        courseName:this.state.courseName
+        // adminId:this.state.adminId
       }
       console.log("Trainerdata="+JSON.stringify(trainerDetails))
 
       await axios.post("http://localhost:7171/api/addTrainer",trainerDetails)
       .then((responseData)=>{
       })
-
     this.props.history.push('/listoftrainer');
-  }
-  cancel(){
-    this.props.history.push('/listoftrainer');
-
-    this.props.history.push('/trainer');
   }
   cancel(){
     this.props.history.push('/login');
-
   }
     
     render() {
@@ -58,7 +117,7 @@ import React, { Component } from 'react'
                   <span className="badge badge-dark">Trainer Register</span>
                 </h1>
                 <div className="form-group mr2">
-                  <div className="alert-danger">{this.state.trainerNameError}</div>
+                  <div className="alert-danger" >{this.state.trainerNameError}</div>
                   <label>Trainer Name</label>
                   <input
                     type="text"
@@ -79,6 +138,7 @@ import React, { Component } from 'react'
                     className="form-control"
                     id="phoneNo"
                     placeholder="Enter PhoneNo"
+                    
                     value={this.state.phoneNo}
                     onChange={(event) =>
                       this.setState({ phoneNo: event.target.value })
@@ -102,7 +162,6 @@ import React, { Component } from 'react'
                 </div>
 
                 <div className="form-group">
-
                   <div className="alert-danger">{this.state.courseNameError}</div>
                   <label>Course Name</label>
                   <input
@@ -117,8 +176,7 @@ import React, { Component } from 'react'
                   />
                 </div>
 
-                <div className="form-group">
-
+                {/* <div className="form-group">
                   <div className="alert-danger">{this.state.adminIdError}</div>
                   <label>Admin Id</label>
                   <input
@@ -131,20 +189,15 @@ import React, { Component } from 'react'
                       this.setState({ adminId: event.target.value })
                     }
                   />
-                </div>
+                </div> */}
 
                
                 <div className="text-center"> 
                 
                   <button type="submit" className="btn btn-primary"
                   onClick={this.registerTrainer}>
-                  Register
+                  Add Trainer
                   </button>
-
-                  <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>
-                    Cancel
-                  </button>
-
                 </div>
                
               </form>
