@@ -14,7 +14,6 @@ import React, { Component } from 'react'
         courseName:"",
         adminId:""
 
-        adminId:"",
 
          }
          this.registerTrainer=this.registerTrainer.bind(this);

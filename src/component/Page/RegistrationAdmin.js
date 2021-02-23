@@ -13,7 +13,7 @@ import React, { Component } from 'react'
         password:"",
         phoneNumber:"",
         address:"",
-        roleType:[],
+        roleType:"admin",
         firstNameError:"",
         lastNameError:"",
         emailError:"",

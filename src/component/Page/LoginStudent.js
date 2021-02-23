@@ -1,45 +1,87 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import Form from "react-bootstrap/Form";
+//import Button from "react-bootstrap/Button";
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-class LoginStudent extends Component {
-    constructor(props) {
-        super(props)
+
+
+
+export class LoginAdmin extends Component {
+    state = {
+        email: "",
+        password: "",
+        loggedIn: '',
+        alreadyLogged: ''
+    }
+    onInputChange = (e) => {
+        this.setState({
+            [e.target.name]: [e.target.value]
+        })
+        // console.log(this.state.email,this.state.password)
+    }
     
-        this.state = {
+    onSubmitHandler = (e) => {
+        e.preventDefault();
+        this.state.UserLogin.map((data) => {
+            if (this.state.email[0] === data.mail && this.state.password[0] === data.password) {
+                this.setState({
+                    loggedIn: this.state.email[0]
+                })
+                localStorage.setItem('userNm', this.state.email[0])
+                var user1 = localStorage.getItem('userNm');
+                               var notify =new Notification(`${this.state.email[0]} is successfully logged in....`)
              
-        }
-        this.handleSubmit= this.handleSubmit.bind(this);
-    }
-    
-    handleSubmit(){
-        this.props.history.push('/login/mainpagestudent');
-    }
-    render() {
-        return (
-            <form className="payment"  onSubmit={this.handleSubmit}>
-            <Router>
-            <h3 className="text-center">Sign In</h3>
-
-        <div className="form-group ">
-            <label>User ID</label>
-            <input type="number" className="form-control" placeholder="Enter user id" />
-        </div>
-
-        <div className="form-group">
-            <label>Password</label>
-            <input type="password" className="form-control" placeholder="Enter password" />
-        </div>
-        <div className="text-center">
-        <button type="submit" className="btn btn-primary btn-lg" onSubmit={this.handleSubmit}>Login</button><br></br>
-        <i>You dont have account?<a href="/registerstudent">SignUp</a></i></div>
-
-        <p className="forgot-password text-right">
-            Forgot <a href="#">password?</a>
-        </p>
-                    </Router>
-                </form>
-                )
+                    window.location.href = '/home'
+             
             }
-        }
-export default LoginStudent
+            else{
+              
+                    document.querySelector('#loginerrorid').classList.add('error-show')
+                    document.querySelector('#loginerrorid').classList.remove('error-hide')
+
+
+               
+               // document.querySelector('#loginerrorid').style.display='block'
+            }
+        })
+
+
+
+
+
+            }
+
+    render() {
+
+        return (
+            <div className="Login">
+                <Form onSubmit={this.onSubmitHandler} className="form-style">
+                    <Form.Group size="lg" controlId="email">
+                        <Form.Label style={{color:'white'}}>Email</Form.Label>
+                        <Form.Control
+                            autoFocus
+                            type="email"
+                            name="email"
+                            value={this.state.email}
+                            onChange={this.onInputChange}
+                        />
+                    </Form.Group>
+                    <Form.Group size="lg" controlId="password">
+                        <Form.Label style={{color:'white'}}>Password</Form.Label>
+                        <Form.Control
+                            type="password"
+                            name="password"
+                            value={this.state.password}
+                            onChange={this.onInputChange}
+                        />
+                    </Form.Group>
+                    <div className="error-hide" id="loginerrorid">Invalid email or password</div>
+                    <Button block size="lg" type="submit">
+                        Login
+                </Button>
+                </Form>
+            </div>
+        );
+    }
+}
+
+export default LoginAdmin
