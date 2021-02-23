@@ -2,11 +2,22 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Registration from './Registration';
-export default class Login extends Component {
+class LoginAdmin extends Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+             
+        }
+        this.handleSubmit= this.handleSubmit.bind(this);
+    }
+    
+    handleSubmit(){
+        this.props.history.push('/login/mainpageadmin');
+    }
     render() {
         return (
-            <form className="payment">
+            <form className="payment"  onSubmit={this.handleSubmit}>
             <Router>
             <h3 className="text-center">Sign In</h3>
 
@@ -19,17 +30,9 @@ export default class Login extends Component {
             <label>Password</label>
             <input type="password" className="form-control" placeholder="Enter password" />
         </div>
-
-        <div className="form-group">
-            <label>Role Type(student/admin)</label>
-            <select>
-                <option name="admin" value="admin">Admin</option>
-                <option name="student" value="student">Student</option>
-            </select>
-        </div>
         <div className="text-center">
-        <button type="submit" className="btn btn-primary btn-lg">Login</button><br></br>
-        <i>You dont have account?<a href="/register">SignUp</a></i></div>
+        <button type="submit" className="btn btn-primary btn-lg" onSubmit={this.handleSubmit}>Login</button><br></br>
+        <i>You dont have account?<a href="/registeradmin">SignUp</a></i></div>
 
         <p className="forgot-password text-right">
             Forgot <a href="#">password?</a>
@@ -39,3 +42,4 @@ export default class Login extends Component {
                 )
             }
         }
+export default LoginAdmin

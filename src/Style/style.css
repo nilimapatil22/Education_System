@@ -1,20 +1,53 @@
 h1 {
     text-align: center;
-    color:tomato;
+    color:indigo;
+}
+h2 {
+    text-align: center;
+    color:indigo;
 }
 .mainpage{
   
-    background-image: url('./bg2.jpg');
+    background-image: url('./mainpage.jpg');
     background-repeat: no-repeat, repeat;
     background-size: cover; 
-    height: 500px;
+    height: 600px;
 
+}
+.welcome{
+    background-image: url('./welcome.jpg');
+    background-repeat: no-repeat, repeat;
+    background-size: cover; 
+    height: 600px;
+
+}
+.page{
+    align-items: center;
+}
+Link{
+    height: 10px;
+    width: 50px;
 }
 .payment{
   
     background-color: #b8d8f1;
     background-repeat: no-repeat, repeat;
     background-size: cover; 
-    height: 500px;
+    height: 600px;
+
+}
+.contact{
+    background-image: url('img.png');
+    background-repeat: no-repeat, repeat;
+    background-size: cover; 
+    height: 600px;
+}
+.aboutus{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    color: aliceblue;
+    background-image: url('about-us.png');
+    background-repeat: repeat;
+    height: 600px; 
 
 }

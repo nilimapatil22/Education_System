@@ -7,7 +7,7 @@ class Navbar extends Component {
     return (
     
        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a className="navbar-brand">Student Education App</a>
+        <a className="navbar-brand">Education System</a>
 
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">

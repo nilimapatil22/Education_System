@@ -1,45 +1,118 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import { NavLink, Link } from "react-router-dom";
 
 class AddTrainingSchedule extends Component {
     constructor(props) {
         super(props)
     
         this.state = {
-            scheduleId:this.props.match.params.scheduleId,
-            courseId:"",
+            courses:[],
+            students:[],
+            trainers:[],
             studentId:"",
+            courseId:"",
             trainerId:"",
-            createdByUserId:"",
             startDate:"",
             endDate:"",
+            studentIdError:"",
             courseIdError:"",
             trainerIdError:"",
             startDateError:"",
-            studentIdError:"",
-            userIdError:"",
             endDateError:""
 
         }
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
-    
-    // handleSubmit = async (event) => {
-    //     event.preventDefault();
-    
-    //     let message = {
-    //       studentId: this.state.studentId,
-    //       messageValue:this.state.messageValue,
-    //       createdByUserId: this.state.createdByUserId,
-    //       createdDate: this.state.createdDate
-    //     };
-    //     console.log(message);
-    //     await 
-    //     MessageService.addMessage(message)
-    //     .then((data) => {})
-    //     .catch((error) => {
-    //       alert(error.response.data.message);});
-    //     this.props.history.push("/");
-    // }
+    componentDidMount(){
+      axios.get("http://localhost:7171/api/getAllCourses")
+      .then((res) =>{
+        let courseData= res.data;
+        this.setState({
+            courses:courseData
+        })
+      
+      })
+      axios.get("http://localhost:7171/api/getAllStudent")
+      .then((res) =>{
+        let studentData= res.data;
+        this.setState({
+            students:studentData
+        })
+      
+      })
+      axios.get("http://localhost:7171/api/getAllTrainers")
+      .then((res) =>{
+        let trainerData= res.data;
+        this.setState({
+            trainers:trainerData
+        })
+      
+      })
+    }
+    validate = () => {
+      let flag = true;
+      if (!this.state.studentId) {
+        flag = false;
+        this.setState({ studentIdError: "Student Id Is Required" });
+      } else {
+        this.setState({ studentIdError: "" });
+      }
+      if (!this.state.courseId) {
+        flag = false;
+        this.setState({ courseIdError: "Course Id Is Required" });
+      } else {
+        this.setState({ courseIdError: "" });
+      }
+      if (!this.state.trainerId) {
+        flag = false;
+        this.setState({ trainerIdError: "Trainer Id Is Required" });
+      } else {
+        this.setState({ trainerIdError: "" });
+      }
+      if (!this.state.startDate) {
+        flag = false;
+        this.setState({ startDateError: "Start Date Is Required" });
+      } else {
+        this.setState({ startDateError: "" });
+      }
+      if (!this.state.endDate) {
+        flag = false;
+        this.setState({ endDateError: "End Date Is Required" });
+      } else {
+        this.setState({ endDateError: "" });
+      }
+      return flag;
+    };
+  
+     handleSubmit = async (event) => {
+         event.preventDefault();
+         
+    let isValid = this.validate();
+    if (!isValid) {
+      return false;
+    }
+
+         let scheduleData = {
+           studentId: this.state.studentId,
+           courseId:this.state.courseId,
+           trainerId:this.state.trainerId,
+           startDate: this.state.startDate,
+           endDate:this.state.endDate
+
+         };
+         console.log(scheduleData);
+         await axios.post("http://localhost:7171/api/addSchedule",scheduleData)
+         
+         .then((data) => {
+           alert("Schedule created!!")
+         })
+         
+         this.props.history.push("/login/trainingschedule");
+     }
+    cancel(){
+      this.props.history.push("/login/trainingschedule");
+  }
     
     render() {
         return (
@@ -47,76 +120,48 @@ class AddTrainingSchedule extends Component {
             <h1>
               <span className="badge badge-dark">Create Training Schedule</span>
             </h1>
-            <div className="form-group mr2">
+            <div className="drop-down">
               <div className="alert-danger">{this.state.studentIdError}</div>
-               <label>Choose Student Id:</label>
-               <select
-                    className="form-control"
-                    value={this.state.studentId}
-                    placeholder="Choose Student Id"
-                    onChange={(event) =>
-                    this.setState({ studentId: event.target.value })
-                }>
-                    <option>Dropdown List Student</option>
-                {/* {this.state.students.map((student) => (
-                    <option key={student.value} value={student.value}>
-                      {student.display}
-                    </option>
-                  ))} */}
-                </select>
+              <label>Choose Student </label><br/>
+              <select 
+              onChange={(event) =>
+              this.setState({ studentId: event.target.value })
+            }>{
+                this.state.students.map(student =>
+                <option value="student.studentId">{student.firstName}</option>)
+                }</select>
+               
         
                 </div>
-            <div className="form-group">
+                
+            <div className="drop-down">
               <div className="alert-danger">{this.state.courseIdError}</div>
-              <label>Choose Course Id:</label>
-               <select
-                    className="form-control"
-                    value={this.state.courseId}
-                    placeholder="Choose Course Id"
-                    onChange={(event) =>
-                    this.setState({ courseId: event.target.value })
-                }>
-                    <option>Drop Down List Course</option>
-                {/* {this.state.students.map((student) => (
-                    <option key={student.value} value={student.value}>
-                      {student.display}
-                    </option>
-                  ))} */}
-                </select>
+              <label>Choose Course</label>
+              <br/>
+
+              <select
+              onChange={(event) =>
+              this.setState({ courseId: event.target.value })
+            }>{
+                this.state.courses.map(course =>
+                <option value="course.courseId">{course.courseName}</option>)
+                }</select>
+
+
             </div>
-            <div className="form-group">
+            <div className="drop-down">
               <div className="alert-danger">{this.state.trainerIdError}</div>
-              <label>Choose Trainer Id:</label>
-               <select
-                    className="form-control"
-                    value={this.state.trainerId}
-                    placeholder="Choose Trainer Id"
-                    onChange={(event) =>
-                    this.setState({ trainerId: event.target.value })
-                }>
-                    <option>Drop Down List Trainer</option>
-                {/* {this.state.students.map((student) => (
-                    <option key={student.value} value={student.value}>
-                      {student.display}
-                    </option>
-                  ))} */}
-                </select>
+              <label>Choose Trainer</label><br/>
+ 
+              <select  
+              onChange={(event) =>
+              this.setState({ trainerId: event.target.value })
+            }>{
+                this.state.trainers.map(trainer =>
+                <option value="trainer.trainerId">{trainer.trainerName}</option>)
+                }</select>
             </div>
-            <div className="form-group">
-              <div className="alert-danger">{this.state.userIdError}</div>
-              <label>Enter User Id:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="createdByUserId"
-                placeholder="Enter Your User Id"
-                required
-                value={this.state.createdByUserId}
-                onChange={(event) =>
-                  this.setState({ createdByUserId: event.target.value })
-                }
-              />
-            </div>
+
             <div className="form-group">
               <div className="alert-danger">{this.state.startDateError}</div>
               <label>Select Start Date:</label>
@@ -147,6 +192,9 @@ class AddTrainingSchedule extends Component {
             </div>
             <button type="submit" className="btn btn-success">
               Create
+            </button>
+            <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>
+              Cancel
             </button>
           </form>
         )
