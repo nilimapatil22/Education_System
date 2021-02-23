@@ -49,6 +49,10 @@ class ViewTrainer extends Component {
             <td>Trainer Email</td>
             <th>{this.state.trainer.email}</th>
           </tr>
+          <tr>
+            <td>Course Name</td>
+            <th>{this.state.trainer.courseName}</th>
+          </tr>
           
         </table>
       </div>

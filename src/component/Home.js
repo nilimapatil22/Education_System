@@ -86,6 +86,7 @@ import AddTrainer from './trainers/AddTrainer';
              <Route exact path="/removecourse/:courseId" component={DeleteCourse}></Route>
              <Route exact path="/viewcourse/:courseId" component={ViewCourse}></Route>
              <Route exact path="/registercourse" component={AddCourse}></Route>
+             {/* <Route exact path="/updatecourse" component={UpdateCourse}></Route> */}
              <Route exact path="/modifycourse/:courseId" component={UpdateCourse}></Route>
 
              <Route exact path="/listoftrainer" component={ListOfTrainer}></Route>
@@ -137,9 +138,12 @@ import AddTrainer from './trainers/AddTrainer';
              <Route exact path="/message/removemessage/:messageId" component={DeleteMessage}></Route>
             <Route exact path = "/messages/modifymessage/:messageId" component={UpdateMessage}></Route>
 
+
              <Route exact path="/login/enroll/payment/" component={AddPayment}></Route>
+
+             {/* <Route exact path="/login/enroll/payment/" component={AddPayment}></Route> */}
              {/* <Route exact path="/login/enroll/payment/course" component={AddCourse}></Route> */}
-             <Route exact path="/enrollcourse" component={EnrollCourse}></Route>
+             {/* <Route exact path="/enrollcourse" component={EnrollCourse}></Route>
              <Route exact path="/chooseCourse/:courseId" component={ChooseCourse}></Route>
              <Route exact path ="/viewCourse" component={ViewCourse}></Route>
              <Route exact path="/viewTrainer/:trainerId" component={ViewTrainer}></Route>
@@ -147,7 +151,7 @@ import AddTrainer from './trainers/AddTrainer';
              <Route exact path="/viewcourse/:courseId" component={ViewCourse}></Route>
              <Route exact path="/listoftrainer" component={ListOfTrainer}></Route>
              <Route exact path="/addcourse" component={AddCourse}></Route>
-             <Route exact path="/addtrainer" component={AddTrainer}></Route>
+             <Route exact path="/addtrainer" component={AddTrainer}></Route> */}
 
             </Router>
           </div>

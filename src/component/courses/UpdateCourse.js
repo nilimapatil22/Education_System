@@ -1,134 +1,96 @@
 import React, { Component } from 'react'
-import axios from "axios"
- class UpdateCourse extends Component {
-    constructor(props){
-        super(props);
-        this.state={
-            courseId:this.props.match.params.courseId,
-            courseName:"",
-            fee:"",
-            duration:"",
-            adminId:"",
-            courseIdError: "",
-            courseNameError: "",
-            feeError: "",
-            durationError: "",
-            adminIdError:"",
-            courseData:[]
-        }
-        this.saveCourse=this.saveCourse.bind(this);
-    }
+import CourseService from '../services/CourseService'
+
+class UpdateCourse extends Component {
+    constructor(props) {
+        super(props)
     
-componentDidMount(){
-    axios.put(`http://localhost:7171/api/getCourse/${this.state.courseId}`).then((res)=>{
-        let courseData=res.data;
-        this.setState=({
-            courseName:courseData.courseName,
-            fee:courseData.fee,
-            duration:courseData.duration,
-            adminId:courseData.adminId
-        });
-    });
- }
-
-    saveCourse= async(e)=>{
-        e.preventDefault();
-        let CourseData={courseId:this.state.courseId,
-                        courseName:this.state.courseName, 
-                        fee:this.state.fee, 
-                        duration:this.state.duration,
-                        adminId:this.state.adminId,
-                         }
-            console.log("course="+JSON.stringify(CourseData))
-
-           await axios.put("http://localhost:7171/api/updateCourse",CourseData).then(responce=>{
-           
-        })
-        this.props.history.push('/listofcourse');
+        this.state = {
+            courseId : '',
+             courseName : '',
+             fee : '',
+             duration:''
+        }
+        this.changeCourseNameHandler = this.changeCourseNameHandler.bind(this)
+        this.changeFeeHandler = this.changeFeeHandler.bind(this)
+        this.changeDurationHandler=this.changeDurationHandler.bind(this)
+        this.updateCourse = this.updateCourse.bind(this)
     }
+    changeCourseNameHandler = (event) => {
+        this.setState({
+            courseName : event.target.value
+        })
+    }
+    changeFeeHandler = (event) => {
+        this.setState({
+            fee : event.target.value
+        })
+    }
+    changeDurationHandler = (event) => {
+      this.setState({
+          duration : event.target.value
+      })
+  }
+    componentDidMount(){
+        CourseService.getCourseById(this.props.match.params.courseId).then((dataResponse) => {
+            const course = dataResponse.data
+            this.setState({
+               courseId : course.courseId,
+                courseName : course.courseName,
+                fee : course.fee,
+                duration:course.duration
 
+            })
+        })
+    }
+    updateCourse = (event) => {
+        event.preventDefault()
+        const courseDetails = {
+           courseId : this.state.courseId,
+            courseName : this.state.courseName,
+            fee : this.state.fee,
+            duration:this.state.duration
+        }
+        CourseService.updateCourse(courseDetails,this.state.courseId).then(dataResponse =>{
+            this.props.history.push('/listofcourse')
+        }) 
+        alert(`Course ${this.state.courseId} is updated succesfully`)
+        console.log(courseDetails)
+    }
     cancel(){
-        this.props.history.push('/listofcourse');
+        this.props.history.push('/listofcourse')
     }
     render() {
         return (
             <div>
-                <div className="payment">
-             
-              <h1>
-          <span className="badge badge-dark">Course List</span>
-        </h1>
-        <form onSubmit={this.saveCourse}>
-        
-        <div className="form-group">
-          <div className="alert-danger">{this.state.courseNameError}</div>
-          <label>Enter Course Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="courseName"
-            placeholder="Enter CourseName"
-            value={this.state.courseName}
-            onChange={(event) =>
-              this.setState({ courseName: event.target.value })
-            }
-          />
-           </div>
-                    
-          <br></br>
-
-          <div className="form-group">
-          <div className="alert-danger">{this.state.feeError}</div>
-          <label>Enter fee(INR)</label>
-          <input
-            type="number"
-            className="form-control"
-            id="fee"
-            placeholder="Enter fee"
-            value={this.state.fee}
-            onChange={(event) =>
-              this.setState({ fee: event.target.value })
-            }
-          />
-           </div>
-
-        
-         
-           <div className="form-group">
-          <div className="alert-danger">{this.state.durationError}</div>
-          <label>Enter duration(days)</label>
-          <input
-            type="number"
-            className="form-control"
-            id="duration"
-            placeholder="Enter duration"
-            value={this.state.duration}
-            onChange={(event) =>
-              this.setState({ duration: event.target.value })
-            }
-          />
-           </div>
-    
-        <div className="form-group">
-          <label>Enter your Id</label>
-        <input type="Number"
-                    className="form-control"
-                    value={this.state.adminId}
-                    placeholder="Enter Admin Id"
-                    onChange={(event) =>
-                    this.setState({ adminId: event.target.value })
-                }/>
-                   
-          </div>
-        <button type="submit" className="btn btn-primary " onClick={this.saveCourse}>
-          Save Course
-        </button><button type="submit" className="btn btn-danger " onClick={this.cancel.bind(this)}>
-          Cancel
-        </button>
-        </form>
-            </div>
+                <div className = "container">
+                    <div className = "row">
+                        <div className = "card col-md-6 offset-md-3 offset-md-3">
+                            <h1 className = "text-center">Update Course</h1>
+                            <div className = "card-body">
+                                <form onSubmit = {this.updateCourse}>
+                                    <div className = "form-group">
+                                        <label>Course Name: </label>
+                                        <input placeholder = "Course Name"  name = "Course Name" className = "form-control" value = {this.state.courseName} onChange = {this.changeCourseNameHandler}/>
+                                    </div>
+                                    <div className = "form-group">
+                                        <label>Course Fee: </label>
+                                        <input placeholder = "Course fee"  name = "Course Fee" className = "form-control" value = {this.state.fee} onChange = {this.changeFeeHandler}/>
+                                    </div>
+                                    <div className = "form-group">
+                                        <label>Course Duration: </label>
+                                        <input placeholder = "Course Duration"  name = "Course Duration" className = "form-control" value = {this.state.duration} onChange = {this.changeDurationHandler}/>
+                                    </div>
+                                    <button className = "btn btn-success"  type = "submit">Update</button>
+                                    <button className = "btn btn-danger" onClick = {this.cancel.bind(this)} style = {{marginLeft : "10px"}}>Cancel</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
 }
+
 export default UpdateCourse
