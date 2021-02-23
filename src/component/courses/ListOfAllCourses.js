@@ -42,12 +42,8 @@ class ListOfAllCourses extends Component {
                     </Link>                 
                 </div>
                 
-                 <br></br>
-
-                        className="btn btn-primary mr-2"
-                         to={"/login/enroll"}>Go Back
-                    </Link>                 
-                </div>
+                 <br></br>                
+            
 
                  <div className = "row">
                         <table className = "table table-striped table-bordered">
@@ -86,15 +82,7 @@ class ListOfAllCourses extends Component {
                                                {/* <Link
                                                     className="btn btn-danger"
                                                     to={`/removecourse/${course.courseId}`}>Delete
-                                                </Link> */}
-
-                                                    to={"/UpdateCourse"}>Modify
-                                                </Link>
-
-                                               <Link
-                                                    className="btn btn-danger"
-                                                    to={"/"}>Delete
-                                                </Link>
+                                               </Link> */}
 
                  
                                              </td>

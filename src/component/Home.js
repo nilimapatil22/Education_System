@@ -7,14 +7,8 @@ import About from './Page/About'
 import Contact from './Page/Contact'
 import RegistrationStudent from './Page/RegistrationStudent';
 import RegistrationAdmin from './Page/RegistrationAdmin';
-import ChooseCourse from './courses/ChooseCourse';
-import ViewCourse from './courses/ViewCourse';
-import ViewTrainer from './trainers/ViewTrainer';
-import ListOfAllCourses from './courses/ListOfAllCourses';
-import ListOfTrainer from './trainers/ListOfTrainer';
-import AddTrainer from './trainers/AddTrainer';
 import DeleteCourse from './courses/DeleteCourse';
-import EnrollCourse from './courses/EnrollCourse';
+
 import ListOfScheduleStudent from './training schedule/ListOfScheduleStudent';
 import ListOfMessagesStudent from './messages/ListOfMessagesStudent';
 import ListOfMessages from './messages/ListOfMessages';
@@ -143,11 +137,6 @@ import AddTrainer from './trainers/AddTrainer';
              <Route exact path="/message/removemessage/:messageId" component={DeleteMessage}></Route>
             <Route exact path = "/messages/modifymessage/:messageId" component={UpdateMessage}></Route>
 
-
-
-              <Route exact path="/" component={Login}></Route>
-              <Route exact path="/register" component={Registration}></Route>
-             <Route exact path="/login/enroll" component={MainPage}></Route>
              <Route exact path="/login/enroll/payment/" component={AddPayment}></Route>
              {/* <Route exact path="/login/enroll/payment/course" component={AddCourse}></Route> */}
              <Route exact path="/enrollcourse" component={EnrollCourse}></Route>

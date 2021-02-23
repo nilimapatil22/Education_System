@@ -11,7 +11,11 @@ class AddTrainingSchedule extends Component {
             students:[],
             trainers:[],
             studentId:"",
-            courseId:"",
+            course:{
+              courseId:"",
+              courseName:"",
+            },
+           
             trainerId:"",
             startDate:"",
             endDate:"",
@@ -122,7 +126,7 @@ class AddTrainingSchedule extends Component {
             </h1>
             <div className="drop-down">
               <div className="alert-danger">{this.state.studentIdError}</div>
-              <label>Choose Student </label><br/>
+              <label>Choose Student   </label>
               <select 
               onChange={(event) =>
               this.setState({ studentId: event.target.value })
@@ -136,22 +140,21 @@ class AddTrainingSchedule extends Component {
                 
             <div className="drop-down">
               <div className="alert-danger">{this.state.courseIdError}</div>
-              <label>Choose Course</label>
-              <br/>
-
+              <label>Choose Course   </label>
+            
               <select
               onChange={(event) =>
-              this.setState({ courseId: event.target.value })
+              this.setState({ course: event.target.value ,})
             }>{
                 this.state.courses.map(course =>
-                <option value="course.courseId">{course.courseName}</option>)
+                <option value="course.value">{course.courseName}</option>)
                 }</select>
 
 
             </div>
             <div className="drop-down">
               <div className="alert-danger">{this.state.trainerIdError}</div>
-              <label>Choose Trainer</label><br/>
+              <label>Choose Trainer  </label>
  
               <select  
               onChange={(event) =>

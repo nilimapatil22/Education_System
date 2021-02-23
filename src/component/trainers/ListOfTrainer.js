@@ -41,12 +41,7 @@ class ListOfTrainer extends Component {
                     <Link 
                         className="btn btn-primary mr-2"
                          to={"/login/mainpageadmin"}>Go Back
-
-                    <Link 
-                        className="btn btn-primary mr-2"
-                         to={"/login/enroll"}>Go Back
-
-                    </Link>                 
+                    </Link>                
                 </div>
                  <div className = "row">
                         <table className = "table table-striped table-bordered">
@@ -87,8 +82,6 @@ class ListOfTrainer extends Component {
                                                     to={`/removetrainer/${trainer.trainerId}`}>Remove
                                                 </Link> */}
 
-                                                    to={"/updatetrainer"}>Modify
-                                                </Link>
 
                                                <Link
                                                     className="btn btn-danger"
