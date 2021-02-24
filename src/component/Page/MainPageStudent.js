@@ -4,7 +4,7 @@ class MainPageStudent extends Component {
   state = {};
   render() {
     return (
-        <form className="mainpage">
+        <form className="mainpage card ">
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <a className="navbar-brand">Welcome</a>
 
@@ -51,9 +51,11 @@ class MainPageStudent extends Component {
                 <tr>
                   <td>
                   <div class="col-6">
-                    <Link to="/login/listofallstudents" className="btn btn-light">My Connect</Link>
+                    <Link to="/login/listofallstudents" className="btn btn-light">My Class</Link>
                   </div>
                   </td>
+                 
+
                   <td>
                   <div class="col-6">
                     <Link to="/enrollcourse" className="btn btn-light">Enroll Course</Link>
@@ -61,7 +63,7 @@ class MainPageStudent extends Component {
                   </td>
                   <td>
                   <div class="col-6">
-                    <Link to="/" className="btn btn-light">Trainer</Link>
+                    <Link to="/choosetrainer" className="btn btn-light">Trainer</Link>
                   </div>
                   </td>
                 </tr>
@@ -98,6 +100,7 @@ class MainPageStudent extends Component {
                       <Link to="/makepayment" className="btn btn-light">Payment</Link>  
                   </div>
                   </td>
+                  
                 </tr>
 
               </table>

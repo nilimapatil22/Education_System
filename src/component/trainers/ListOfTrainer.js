@@ -29,8 +29,8 @@ class ListOfTrainer extends Component {
 
     render() {
         return (
-            <div>
-                 <h2 className="text-center">List of All Course</h2>
+            <div className="trainer">
+                 <h2 className="text-center">List of All Trainer</h2>
                  <br></br>
                  <div className = "row">
                  <Link 
@@ -40,18 +40,14 @@ class ListOfTrainer extends Component {
                     <Link 
                         className="btn btn-primary mr-2"
                          to={"/login/mainpageadmin"}>Go Back
-
-                    </Link>                
-                </div>
              </Link>
              </div>
-
                  <div className = "row">
                         <table className = "table table-striped table-bordered">
 
                             <thead>
                                 <tr>
-                                    <th>Trainer Id</th>
+                                    {/* <th>Trainer Id</th> */}
                                     <th> Trainer Name </th>
                                     <th>Course Name</th>
                                     {/* <th>  Trainer PhoneNo </th>
@@ -65,7 +61,7 @@ class ListOfTrainer extends Component {
                                     {
                                         return(
                                             <tr key={key}>
-                                                <td>{trainer.trainerId}</td>
+                                                {/* <td>{trainer.trainerId}</td> */}
                                                 <td>{trainer.trainerName}</td>
                                                 <td>{trainer.courseName}</td>
                                                 {/* <td>{trainer.phoneNo}</td>
@@ -78,20 +74,8 @@ class ListOfTrainer extends Component {
 
                                                 <Link 
                                                     className="btn btn-primary mr-2" 
-
-
                                                     to={`/modifytrainer/${trainer.trainerId}`}>Modify
                                                 </Link>
-{/* 
-                                               <Link
-                                                    className="btn btn-danger"
-                                                    to={`/removetrainer/${trainer.trainerId}`}>Remove
-                                                </Link> */}
-
-
-                                                    to={`/updatetrainer/${trainer.trainerId}`}>Modify
-                                                </Link>
-
 
                                                {/* <Link
                                                     className="btn btn-danger"

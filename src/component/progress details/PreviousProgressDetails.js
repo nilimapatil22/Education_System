@@ -4,38 +4,38 @@ import { NavLink, Link } from "react-router-dom";
 export default class PreviousProgressDetails extends Component {
     constructor(props) {
         super(props)
-    
+
         this.state = {
             //  grade:"",
             //  date:"",
             //  student:"",
             //  admin:"",
             //  courseId:""
-            progressdata:[]
+            progressdata: []
         }
     }
-   
-    componentDidMount(){
-        axios.get("http://localhost:7171/api/getStudentAllPreviousProgressDetails").then(responce=> {
+
+    componentDidMount() {
+        axios.get("http://localhost:7171/api/getStudentAllPreviousProgressDetails").then(responce => {
             this.setState({
-                progressdata:responce.data
+                progressdata: responce.data
             });
         })
     }
     render() {
         return (
-            <div>
+            <div className="progressview1">
                 <h1 >Previous Progress Report Card</h1>
-                <div className = "row">  
-                    <Link 
-                        className="btn btn-primary mr-2" align ="right" to={"/login/listofprogressstudent"}>Go Back
-                    </Link>              
+                <div className="row ">
+                    <Link
+                        className="btn btn-primary mr-2" align="right" to={"/login/listofprogressstudent"}>Go Back
+                    </Link>
                 </div>
-                <div className="row">
+                <div className="row card col-md-10 offset-md-1 offset-md-1">
                     <table className="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>Progress Id</th>
+                                {/* <th>Progress Id</th> */}
                                 <th>Grade</th>
                                 <th>Date</th>
                                 <th>CourseID</th>
@@ -46,20 +46,20 @@ export default class PreviousProgressDetails extends Component {
                         </thead>
                         <tbody>
                             {this.state.progressdata.map(
-                                    progressdata=>
+                                progressdata =>
                                     <tr key={progressdata.gradeId}>
-                                        <td>{progressdata.gradeId}</td>
+                                        {/* <td>{progressdata.gradeId}</td> */}
                                         <td>{progressdata.grade}</td>
                                         <td>{progressdata.date}</td>
                                         <td>{progressdata.courseId}</td>
                                         <td>
-                                                    <Link 
-                                                        className="btn btn-primary mr-2" 
-                                                        to={`/viewprogressstudent/${progressdata.gradeId}`}>View
+                                            <Link
+                                                className="btn btn-primary mr-2"
+                                                to={`/viewprogressstudent/${progressdata.gradeId}`}>View
                                                     </Link>
-                     
-                                       </td>
-                                    </tr>    
+
+                                        </td>
+                                    </tr>
                             )}
                         </tbody>
                     </table>

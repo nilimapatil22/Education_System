@@ -7,63 +7,64 @@ class ListOfTrainingSchedule extends Component {
         super(props)
 
         this.state = {
-                schedules: []
+            schedules: []
         }
     }
 
 
 
-    componentDidMount(){
+    componentDidMount() {
         axios.get("http://localhost:7171/api/getAllSchedules")
-        .then(res => {
-             this.setState({ schedules: res.data
-            });
-        })
-        .catch((error) =>{
-            alert(JSON.stringify("error: " + error));
-        })
-     }
+            .then(res => {
+                this.setState({
+                    schedules: res.data
+                });
+            })
+            .catch((error) => {
+                alert(JSON.stringify("error: " + error));
+            })
+    }
 
 
 
     render() {
         return (
-            <div>
-                 <h2 className="text-center">Training Schedule List</h2>
-                 <div className = "row">
-                    <Link 
+            <div className="listSchedule">
+                <h2 className="text-center">Training Schedule List</h2>
+                <div className="row">
+                    <Link
                         className="btn btn-primary mr-2" to={"/trainingschedule/createschedule"}>Create Schedule
-                    </Link> 
-                    <Link 
-                        className="btn btn-primary mr-2"  to={"/login/mainpageadmin"}>Go Back
-                    </Link>                 
+                    </Link>
+                    <Link
+                        className="btn btn-primary mr-2" to={"/login/mainpageadmin"}>Go Back
+                    </Link>
                 </div>
-                
-                 <br></br>
-                 <div className = "row">
-                        <table className = "table table-striped table-bordered">
 
-                            <thead>
-                                <tr>
-                                    <th> Student Id </th>
-                                    <th> Start Date </th>
-                                    <th> End Date</th>
-                                    <th> Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                     this.state.schedules.map(
-                                         schedule => 
-                                         <tr key = {schedule.scheduleId}>
-                                              <td> {schedule.studentId} </td>   
-                                              <td> {schedule.startDate}</td>
-                                              <td> {schedule.endDate}</td>
+                <br></br>
+                <div className="row">
+                    <table className="table table-striped table-bordered">
 
-                                             
-                                             <td>
-                                                <Link 
-                                                    className="btn btn-primary mr-2" 
+                        <thead>
+                            <tr>
+                                <th> Course Name </th>
+                                <th> Start Date </th>
+                                <th> End Date</th>
+                                <th> Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                this.state.schedules.map(
+                                    schedule =>
+                                        <tr key={schedule.scheduleId}>
+                                            <td> {schedule.courseName} </td>
+                                            <td> {schedule.startDate}</td>
+                                            <td> {schedule.endDate}</td>
+
+
+                                            <td>
+                                                <Link
+                                                    className="btn btn-primary mr-2"
                                                     to={`/trainingschedule/viewschedule/${schedule.scheduleId}`}>View
                                                 </Link>
                                                 <Link
@@ -74,15 +75,15 @@ class ListOfTrainingSchedule extends Component {
                                                     className="btn btn-danger"
                                                     to={`/trainingschedule/removeschedule/${schedule.scheduleId}`}>Remove
                                                 </Link> */}
-                 
-                                             </td>
-                                        </tr>
-                                     )
-                                }
-                            </tbody>
-                        </table>
 
-                 </div>
+                                            </td>
+                                        </tr>
+                                )
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
 
             </div>
         )

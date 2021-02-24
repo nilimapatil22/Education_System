@@ -21,7 +21,8 @@ class ViewTrainer extends Component {
 
   render() {
     return (
-      <div>
+      <div className="view">
+        <form className="card col-md-6 offset-md-3 offset-md-3">
         <h1>
           <span className="badge badge-dark">View Trainer</span>
         </h1>
@@ -33,10 +34,10 @@ class ViewTrainer extends Component {
                 </div>
 
         <table className="table table-bordered">
-          <tr>
+          {/* <tr>
             <td>Trainer Id</td>
             <th>{this.state.trainer.trainerId}</th>
-          </tr>
+          </tr> */}
           <tr>
             <td>Trainer Name</td>
             <th>{this.state.trainer.trainerName}</th>
@@ -55,6 +56,7 @@ class ViewTrainer extends Component {
           </tr>
           
         </table>
+        </form>
       </div>
     );
   }

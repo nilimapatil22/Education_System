@@ -4,78 +4,83 @@ import { NavLink, Link } from "react-router-dom";
 export default class StudentProgressView extends Component {
     constructor(props) {
         super(props)
-    
+
         this.state = {
             //  grade:"",
             //  date:"",
             //  student:"",
             //  admin:"",
             //  courseId:""
-            progressdata:[]
+            progressdata: []
         }
     }
-    editgrade(gradeId){
+    editgrade(gradeId) {
         this.props.history.push(`/editprogress/${gradeId}`);
-        
-        }
-    componentDidMount(){
-        axios.get("http://localhost:7171/api/getAllPreviousProgressDetails").then(responce=> {
+
+    }
+    componentDidMount() {
+        axios.get("http://localhost:7171/api/getAllPreviousProgressDetails").then(responce => {
             this.setState({
-                progressdata:responce.data
+                progressdata: responce.data
             });
         })
     }
     render() {
         return (
-            <div>
-                <h1 >Report Card</h1>
-                <div className = "row">
-                    <Link 
-                        className="btn btn-primary mr-2" to={"/viewpreviousprogress"}>Progress History
+            <div className="progressviewimage ">
+
+                <div className="card progressview color col-md-10 offset-md-1 offset-md-1 ">
+                    <h1 >Report Card</h1>
+                    <div className="row">
+                        <Link
+                            className="btn btn-primary mr-2" to={"/viewpreviousprogress"}>Progress History
                     </Link>
-                    <Link 
-                        className="btn btn-primary mr-2" to={"/login/mainpagestudent"}>Go Back
+                        <Link
+                            className="btn btn-primary mr-2" to={"/login/mainpagestudent"}>Go Back
                     </Link>
-               
-                </div>
-                 <br></br>
-                
-                <div className="row">
-                    <table className="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Progress Id</th>
-                                <th>Grade</th>
-                                <th>Date</th>
-                                <th>CourseID</th>
-                                <th>Actions</th>
-                                {/* <th>Admin ID</th> */}
-                                {/* <th>student ID</th> */}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.state.progressdata.map(
-                                    progressdata=>
-                                    <tr key={progressdata.gradeId}>
-                                        <td>{progressdata.gradeId}</td>
-                                        <td>{progressdata.grade}</td>
-                                        <td>{progressdata.date}</td>
-                                        <td>{progressdata.courseId}</td>
-                                        <td>
-                                            <Link 
-                                                className="btn btn-primary mr-2" 
-                                                to={`/viewprogressstudent/${progressdata.gradeId}`}>View
+
+                    </div>
+                    <br></br>
+
+                    <div className="row">
+                        <table className="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    {/* <th>Progress Id</th> */}
+                                    <th>Grade</th>
+                                    <th>Date</th>
+                                    <th>student ID</th>
+                                    {/* <th>CourseID</th> */}
+                                    <th>Actions</th>
+                                    {/* <th>Admin ID</th> */}
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.progressdata.map(
+                                    progressdata =>
+                                        <tr key={progressdata.gradeId}>
+                                            {/* <td>{progressdata.gradeId}</td> */}
+                                            <td>{progressdata.grade}</td>
+                                            <td>{progressdata.date}</td>
+                                            {/* <td>{progressdata.courseId}</td> */}
+                                            <td>{progressdata.studentId}</td>
+                                            <td>
+                                                <Link
+                                                    className="btn btn-primary mr-2"
+                                                    to={`/viewprogressstudent/${progressdata.gradeId}`}>View
                                             </Link>
 
-                                        </td>
-                                    </tr>
-                               
-                                
-                            )}
-                        </tbody>
-                    </table>
-                </div>
+                                            </td>
+                                        </tr>
 
+
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
             </div>
         )
     }

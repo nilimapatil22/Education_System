@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import TrainerService from '../services/TrainerService'
+import TrainerService from '../Service/TrainerService'
 
 class UpdateTrainer extends Component {
     constructor(props) {
@@ -71,7 +71,7 @@ class UpdateTrainer extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="view">
                 <div className = "container">
                     <div className = "row">
                         <div className = "card col-md-6 offset-md-3 offset-md-3">
@@ -80,20 +80,20 @@ class UpdateTrainer extends Component {
                                 <form onSubmit = {this.updateTrainer}>
                                     <div className = "form-group">
                                         <label>Trainer Name: </label>
-                                        <input placeholder = "Trainer Name"  name = "Trainer Name" className = "form-control" value = {this.state.trainerName} onChange = {this.changeTrainerNameHandler}/>
+                                        <input placeholder = "Trainer Name"  name = "Trainer Name" required className = "form-control" value = {this.state.trainerName} onChange = {this.changeTrainerNameHandler}/>
                                     </div>
                                     <div className = "form-group">
                                         <label>Trainer Phone Number: </label>
-                                        <input placeholder = "Trainer Phone Number"  name = "Phone Number" className = "form-control" value = {this.state.phoneNo} onChange = {this.changePhoneNoHandler}/>
+                                        <input placeholder = "Trainer Phone Number"  name = "Phone Number" required className = "form-control" value = {this.state.phoneNo} onChange = {this.changePhoneNoHandler}/>
                                     </div>
                                     <div className = "form-group">
                                         <label>Trainer Email: </label>
-                                        <input placeholder = "Trainer Email"  name = "Trainer Email" className = "form-control" value = {this.state.email} onChange = {this.changeEmailHandler}/>
+                                        <input placeholder = "Trainer Email"  name = "Trainer Email" required className = "form-control" value = {this.state.email} onChange = {this.changeEmailHandler}/>
                                     </div>
 
                                     <div className = "form-group">
                                         <label>Course Name: </label>
-                                        <input placeholder = "Course Name"  name = "Course Name" className = "form-control" value = {this.state.courseName} onChange = {this.changeCourseDataHandler}/>
+                                        <input placeholder = "Course Name"  name = "Course Name" required className = "form-control" value = {this.state.courseName} onChange = {this.changeCourseDataHandler}/>
                                     </div>
                                     <button className = "btn btn-success"  type = "submit">Update</button>
                                     <button className = "btn btn-danger" onClick = {this.cancel.bind(this)} style = {{marginLeft : "10px"}}>Cancel</button>

@@ -1,148 +1,151 @@
 import axios from 'axios';
 import React, { Component } from 'react'
 
- class RegistrationStudent extends Component {
-    constructor(props) {
-        super(props)
-    
-        this.state = {
-        userId:"",
-        firstName:"",
-        lastName:"",
-        email:"",
-        password:"",
-        phoneNumber:"",
-        address:"",
-        roleType:"student",
-        firstNameError:"",
-        lastNameError:"",
-        emailError:"",
-        passwordError:"",
-        phoneNumberError:"",
-        addressError:"",
-        roleTypeError:""
-         }
-         this.registerUser=this.registerUser.bind(this);
-         this.cancel=this.cancel.bind(this);
+class RegistrationStudent extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      userId: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      phoneNumber: "",
+      address: "",
+      roleType: "student",
+      firstNameError: "",
+      lastNameError: "",
+      emailError: "",
+      passwordError: "",
+      phoneNumberError: "",
+      addressError: "",
+      roleTypeError: ""
+    }
+    this.registerUser = this.registerUser.bind(this);
+    this.cancel = this.cancel.bind(this);
+  }
+
+  validate = () => {
+    let flag = true;
+    //validation of firstname
+    if (this.state.firstName === "") {
+      flag = false;
+      this.setState({ firstNameError: "Student's first Name is required" });
+    }
+    else if (!/[A-Z]{1}[a-z]/.test(this.state.firstName)) {
+      this.setState({ firstNameError: "first letter should be capital" })
+    }
+    else {
+      this.setState({ firstNameError: "" });
     }
 
-       validate=()=>{
-         let flag=true;
-        //validation of firstname
-        if(this.state.firstName===""){
-         flag=false;
-          this.setState({firstNameError:"Student's first Name is required"});
-        } 
-        else if(!/[A-Z]{1}[a-z]/.test(this.state.firstName)){
-          this.setState({firstNameError:"first letter should be capital"})
-        }
-        else{
-          this.setState({firstNameError:""});
-       }
-      
-        //validation of lastname
-        if(this.state.lastName===""){
-          flag=false;
-           this.setState({lastNameError:"Student's last Name is required"});
-         } 
-         else if(!/[A-Z]{1}[a-z]/.test(this.state.lastName)){
-           this.setState({lastNameError:"first letter should be capital"})
-         }
-         else{
-           this.setState({lastNameError:""});
-        }
-       
-      //validation of email
-     if(this.state.email===""){
-          flag=false;
-         this.setState({emailError : "Email is required"})
-       }
-       else if(!/\S+@\S+\.\S+/.test(this.state.email)){
-           this.setState({emailError : "Email address is invalid"})
-       }
-      else{
-        this.setState({emailError:""})
-      }
-      
-      //validation of phone number
-      if(!this.state.phoneNumber){
-      flag=false;
-      this.setState({phoneNumberError:"Phone number is required"});
-      }
-      else{
-        this.setState({phoneNumberError:""});
-      }
+    //validation of lastname
+    if (this.state.lastName === "") {
+      flag = false;
+      this.setState({ lastNameError: "Student's last Name is required" });
+    }
+    else if (!/[A-Z]{1}[a-z]/.test(this.state.lastName)) {
+      this.setState({ lastNameError: "first letter should be capital" })
+    }
+    else {
+      this.setState({ lastNameError: "" });
+    }
+
+    //validation of email
+    if (this.state.email === "") {
+      flag = false;
+      this.setState({ emailError: "Email is required" })
+    }
+    else if (!/\S+@\S+\.\S+/.test(this.state.email)) {
+      this.setState({ emailError: "Email address is invalid" })
+    }
+    else {
+      this.setState({ emailError: "" })
+    }
+
+    //validation of phone number
+    if (!this.state.phoneNumber) {
+      flag = false;
+      this.setState({ phoneNumberError: "Phone number is required" });
+    }
+    else {
+      this.setState({ phoneNumberError: "" });
+    }
 
     //validation of address
-    if(this.state.address===""){
-      flag=false;
-      this.setState({addressError:"address is required"});
+    if (this.state.address === "") {
+      flag = false;
+      this.setState({ addressError: "address is required" });
     }
-    else{
-      this.setState({addressError:""});
+    else {
+      this.setState({ addressError: "" });
     }
-    
+
     //validation of roleType
-    if(this.state.roleType===""){
-       flag=false;
-       this.setState({roleTypeError:"roletype is required"});
-     }
-     else if(this.state.roleType!="student")
-     {
-       this.setState({roleTypeError:"you are not authorized"})
-     }
-     else{
-       this.setState({roleTypeError:""});
-     }
-    
-     //validation of password
-     if(this.state.password===""){
-      flag=false;
-      this.setState({passwordError:"password is required"});
+    if (this.state.roleType === "") {
+      flag = false;
+      this.setState({ roleTypeError: "roletype is required" });
     }
-    else if(this.state.password.length<8||this.state.password.length>20)
-    {
-      this.setState({passwordError:"Password is invalid"})
+    else if (this.state.roleType != "student") {
+      this.setState({ roleTypeError: "you are not authorized" })
     }
-    else{
-      this.setState({passwordError:""});
+    else {
+      this.setState({ roleTypeError: "" });
     }
-   return flag;
-     }
 
-    registerUser=async(e)=>{
-      e.preventDefault()
+    //validation of password
+    if (this.state.password === "") {
+      flag = false;
+      this.setState({ passwordError: "password is required" });
+    }
+    else if (this.state.password.length < 8 || this.state.password.length > 20) {
+      this.setState({ passwordError: "Password is invalid" })
+    }
+    else {
+      this.setState({ passwordError: "" });
+    }
+    return flag;
+  }
 
-      let isValid = this.validate();
+  registerUser = async (e) => {
+    e.preventDefault()
+
+    let isValid = this.validate();
     if (!isValid) {
       return false;
-     }
+    }
 
-      let userDetails={
-        userId:this.state.userId,firstName:this.state.firstName,
-        lastName:this.state.lastName,email:this.state.email,
-        password:this.state.password, phoneNumber:this.state.phoneNumber,
-        address:this.state.address,roleType:this.state.roleType
-      }
-      console.log("Studentdata="+JSON.stringify(userDetails))
+    let userDetails = {
+      userId: this.state.userId, firstName: this.state.firstName,
+      lastName: this.state.lastName, email: this.state.email,
+      password: this.state.password, phoneNumber: this.state.phoneNumber,
+      address: this.state.address, roleType: this.state.roleType
+    }
+    console.log("Studentdata=" + JSON.stringify(userDetails))
 
-      await axios.post("http://localhost:7171/api/addStudent",userDetails)
-      .then((responseData)=>{
+    await axios.post("http://localhost:7171/api/addStudent", userDetails)
+      .then((responseData) => {
+
       })
     this.props.history.push('/loginstudent');
+    alert(`Student registered succesfully`)
   }
-  cancel(){
+  cancel() {
     this.props.history.push('/');
   }
 
-    
-    render() {
-        return (
-            <div>
-                <form onSubmit={this.registerUser}>
+
+  render() {
+    return (
+      <div className="signup">
+        <div className="container">
+          <div className="row">
+            <div className="signupform card col-md-6 offset-md-3 offset-md-3">
+              <form onSubmit={this.registerUser}>
 
                 <h1 className="text-center">
-                  <span className="badge badge-dark">Register</span>
+                  <span className="badge badge-dark"> Student Register</span>
                 </h1>
                 <div className="form-group mr2">
                   <div className="alert-danger">{this.state.firstNameError}</div>
@@ -247,26 +250,29 @@ import React, { Component } from 'react'
                     }
                   />
                 </div>
-                
-                 
-                <div className="text-center"> 
-                
+
+
+                <div className="text-center">
+
                   <button type="submit" className="btn btn-primary"
-                  onClick={this.registerUser}>
-                  Register
+                    onClick={this.registerUser}>
+                    Register
                   </button>
 
                   <button type="submit" className="btn btn-danger"
-                  onClick={this.cancel}>
+                    onClick={this.cancel}>
                     Cancel
                   </button>
-      
-      
-                <br/><i>Already have an account?<a href="/loginstudent">SignIn</a></i></div>
-               
+
+
+                  <br /><i>Already have an account?<a href="/loginstudent">SignIn</a></i></div>
+
               </form>
             </div>
-        )
-    }
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 export default RegistrationStudent

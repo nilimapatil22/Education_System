@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CourseService from '../services/CourseService'
+import CourseService from '../Service/CourseService'
 
 class UpdateCourse extends Component {
     constructor(props) {
@@ -62,7 +62,7 @@ class UpdateCourse extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="viewcourse">
                 <div className = "container">
                     <div className = "row">
                         <div className = "card col-md-6 offset-md-3 offset-md-3">
@@ -71,15 +71,15 @@ class UpdateCourse extends Component {
                                 <form onSubmit = {this.updateCourse}>
                                     <div className = "form-group">
                                         <label>Course Name: </label>
-                                        <input placeholder = "Course Name"  name = "Course Name" className = "form-control" value = {this.state.courseName} onChange = {this.changeCourseNameHandler}/>
+                                        <input placeholder = "Course Name"  name = "Course Name" required className = "form-control" value = {this.state.courseName} onChange = {this.changeCourseNameHandler}/>
                                     </div>
                                     <div className = "form-group">
                                         <label>Course Fee: </label>
-                                        <input placeholder = "Course fee"  name = "Course Fee" className = "form-control" value = {this.state.fee} onChange = {this.changeFeeHandler}/>
+                                        <input placeholder = "Course fee"  name = "Course Fee" required className = "form-control" value = {this.state.fee} onChange = {this.changeFeeHandler}/>
                                     </div>
                                     <div className = "form-group">
                                         <label>Course Duration: </label>
-                                        <input placeholder = "Course Duration"  name = "Course Duration" className = "form-control" value = {this.state.duration} onChange = {this.changeDurationHandler}/>
+                                        <input placeholder = "Course Duration"  name = "Course Duration" required className = "form-control" value = {this.state.duration} onChange = {this.changeDurationHandler}/>
                                     </div>
                                     <button className = "btn btn-success"  type = "submit">Update</button>
                                     <button className = "btn btn-danger" onClick = {this.cancel.bind(this)} style = {{marginLeft : "10px"}}>Cancel</button>

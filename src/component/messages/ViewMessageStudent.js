@@ -4,37 +4,37 @@ import { NavLink, Link } from "react-router-dom";
 class ViewMessageStudent extends Component {
   state = {
     message: {
-    
+
     }
   };
   componentDidMount() {
-     axios
-       .get(
-         `http://localhost:7171/api/getStudentMessage/${this.props.match.params.messageId}`
-       )
-       .then((result) => {
-         this.setState({
+    axios
+      .get(
+        `http://localhost:7171/api/getStudentMessage/${this.props.match.params.messageId}`
+      )
+      .then((result) => {
+        this.setState({
           message: result.data,
-         });
-       });
-   }
+        });
+      });
+  }
 
   render() {
     return (
-      <div>
+      <div className="viewMessage">
         <h1>
           <span className="badge badge-dark">View Message</span>
         </h1>
-        <div className = "row">  
-            <Link 
-                className="btn btn-primary mr-2" align ="right" to={"/login/messagesstudent"}>Go Back
-            </Link>              
+        <div className="row">
+          <Link
+            className="btn btn-primary mr-2" align="right" to={"/login/messagesstudent"}>Go Back
+            </Link>
         </div>
         <table className="table table-bordered">
-          <tr>
+          {/* <tr>
             <td>Message Id</td>
             <th>{this.state.message.messageId}</th>
-          </tr>
+          </tr> */}
           <tr>
             <td>Message</td>
             <th>{this.state.message.message}</th>
@@ -43,10 +43,7 @@ class ViewMessageStudent extends Component {
             <td>Student Id</td>
             <th>{this.state.message.studentId}</th>
           </tr>
-          <tr>
-            <td>User Id</td>
-            <th>{this.state.message.createdByUserId}</th>
-          </tr>
+
           <tr>
             <td>Created Date</td>
             <th>{this.state.message.createdDate}</th>

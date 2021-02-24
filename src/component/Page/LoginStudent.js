@@ -1,87 +1,119 @@
-import React, { Component } from 'react';
-import Form from "react-bootstrap/Form";
-//import Button from "react-bootstrap/Button";
+import axios from 'axios';
+import React from 'react';
+import { Link } from "react-router-dom";
+//import AdminService from './services/AdminService';
+//import HomeHeader from "./HomeHeader";
+//<HomeHeader />
+class LoginStudent extends React.Component {
+    constructor(props) {
+        super(props)
 
-
-
-
-export class LoginAdmin extends Component {
-    state = {
-        email: "",
-        password: "",
-        loggedIn: '',
-        alreadyLogged: ''
+        this.state = {
+            userId: "",
+            password: "",
+            error: false,
+            errors: {}
+        }
+        this.loginUser = this.loginUser.bind(this);
     }
-    onInputChange = (e) => {
+    handleChange = (event) => {
+        this.setState({ [event.target.name]: event.target.value });
+    }
+
+    loginUser = (event) => {
+        event.preventDefault();
+
+        axios.get(`http://localhost:7171/api/getStudent/${this.state.userId}/${this.state.password}`)
+            .then((response) => {
+                if (response.data) {
+                    console.log(this.state.userId)
+                    console.log(this.state.password)
+                    alert("LoggedIn successfully");
+                    this.props.history.push("/login/mainpagestudent");
+                    localStorage.setItem("isLoggedIn", true);
+
+                } else {
+                    this.setState((this.state.error = "Credentials"));
+                    console.log(this.state.userId)
+                    console.log(this.state.password)
+                }
+            })
+            .catch((error) => {
+                alert("Invalid credentials")
+                console.log(this.state.userId)
+                console.log(this.state.password)
+            });
+
+    }
+
+    validateForm() {
+        let user = {
+            userId: this.state.userId,
+            password: this.state.password
+        };
+        let errors = {};
+        let formIsValid = true;
+
+        if (!user.userId) {
+            formIsValid = false;
+            errors["userId"] = "*Please enter your userId.";
+        }
+
+        if (!user.password) {
+            formIsValid = false;
+            errors["password"] = "*Please enter your password.";
+        }
+
         this.setState({
-            [e.target.name]: [e.target.value]
-        })
-        // console.log(this.state.email,this.state.password)
+            errors: errors,
+        });
+        return formIsValid;
     }
-    
-    onSubmitHandler = (e) => {
-        e.preventDefault();
-        this.state.UserLogin.map((data) => {
-            if (this.state.email[0] === data.mail && this.state.password[0] === data.password) {
-                this.setState({
-                    loggedIn: this.state.email[0]
-                })
-                localStorage.setItem('userNm', this.state.email[0])
-                var user1 = localStorage.getItem('userNm');
-                               var notify =new Notification(`${this.state.email[0]} is successfully logged in....`)
-             
-                    window.location.href = '/home'
-             
-            }
-            else{
-              
-                    document.querySelector('#loginerrorid').classList.add('error-show')
-                    document.querySelector('#loginerrorid').classList.remove('error-hide')
-
-
-               
-               // document.querySelector('#loginerrorid').style.display='block'
-            }
-        })
-
-
-
-
-
-            }
 
     render() {
 
         return (
-            <div className="Login">
-                <Form onSubmit={this.onSubmitHandler} className="form-style">
-                    <Form.Group size="lg" controlId="email">
-                        <Form.Label style={{color:'white'}}>Email</Form.Label>
-                        <Form.Control
-                            autoFocus
-                            type="email"
-                            name="email"
-                            value={this.state.email}
-                            onChange={this.onInputChange}
-                        />
-                    </Form.Group>
-                    <Form.Group size="lg" controlId="password">
-                        <Form.Label style={{color:'white'}}>Password</Form.Label>
-                        <Form.Control
-                            type="password"
-                            name="password"
-                            value={this.state.password}
-                            onChange={this.onInputChange}
-                        />
-                    </Form.Group>
-                    <div className="error-hide" id="loginerrorid">Invalid email or password</div>
-                    <Button block size="lg" type="submit">
-                        Login
-                </Button>
-                </Form>
+
+            <div class="body login">
+                <form class="form-signin card col-md-6 offset-md-3 offset-md-3" method="get">
+                    <h1 class="h3 mb-3 font-weight-normal"><b>Login</b></h1>
+
+                    <label>User Id</label>
+                    <input type="number"
+                        placeholder="Enter User Id"
+                        name="userId"
+                        value={this.state.userId}
+                        class="form-control"
+                        onChange={this.handleChange} />
+
+                    <br />
+
+                    <label>Password</label>
+                    <input type="password"
+                        name="password"
+                        placeholder="Enter Password"
+                        value={this.state.password}
+                        class="form-control"
+                        onChange={this.handleChange}
+                        placeholder="Enter Password" />
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" value="remember-me" /> Remember me
+              </label>
+                    </div>
+
+                    <button type="submit" onClick={this.loginUser}
+                        className="btn btn-lg btn-primary btn-block" >Sign in</button>
+                    <i>You don't have an account?<a href="registerstudent">SignUp</a></i>
+                    {/* <p className="forgot-password ">
+                        Forgot <a href="#">password?</a>
+                    </p> */}
+
+
+                </form>
             </div>
         );
     }
 }
-
-export default LoginAdmin
+export default LoginStudent;

@@ -31,13 +31,13 @@ class ViewPaymentStudent extends Component {
             </Link>              
         </div>
         <table className="table table-bordered">
-          <tr>
+          {/* <tr>
             <td>Payment Id</td>
             <th>{this.state.payment.paymentId}</th>
-          </tr>
+          </tr> */}
           <tr>
             <td>Amount</td>
-            <th>{this.state.payment.fee}</th>
+            <th>{this.state.payment.amount}</th>
           </tr>
           <tr>
             <td>Payment Status</td>

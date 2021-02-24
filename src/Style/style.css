@@ -51,3 +51,157 @@ Link{
     height: 600px; 
 
 }
+.login{
+    background-image: url('image1.jpg');
+    background-size: cover; 
+    height: 600px; 
+
+}
+.signup{
+    background-image: url('reg.jpg');
+    background-size: cover; 
+    
+}
+.signupform{
+    background-image: url('reg2.jpg');
+    background-size: cover; 
+    
+}
+.myconnect{
+    background-color: whitesmoke;
+    background-size: cover; 
+}
+.course{
+    background-image: url('image9.jpg');
+    background-size: cover; 
+    height: 600px;
+}
+.addcourse{
+    background-image: url('image5.png');
+    background-size: cover; 
+    height: 600px;
+}
+.viewcourse{
+    background-image: url('course.jpg');
+    background-size: cover; 
+    height: 600px;
+}
+.trainer{
+    background-image: url('trainer.jpg');
+    background-size: cover; 
+    background-repeat: repeat;
+
+}
+.view{
+    background-image: url('image3.jpg');
+    background-size: cover; 
+}
+.progress{
+    background-image: url('image6.jpg');
+    background-size: cover; 
+    height: 600px;
+}
+.progressview{
+    background-image: url('mastimage.png');
+    background-size: cover; 
+    height: 600px;
+}
+.progressview1{
+    background-image: url('image10.jpg');
+    background-size: cover; 
+    
+}
+.color{
+    color: navy;
+    font-size: medium;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.paymentview{
+    background-image: url('payment1.jpg');
+    background-size: cover; 
+}
+.paymentviewdetail{
+    background-image: url('payment2.jpg');
+    background-size: cover; 
+    height: 600px;
+}
+.enroll{
+    background-image: url('image5.png');
+    background-size: cover; 
+    height: 600px;
+}
+.enrolltrainer{
+    background-image: url('image11.jpg');
+    background-size: cover; 
+    height: 600px;
+}
+.progressviewstudent{
+    background-image: url('image12.jpg');
+    background-size: cover; 
+    height: 600px;
+}
+.progressviewimage{
+    background-image: url('OIP.jpg');
+    
+    height: 700px;
+}
+.viewSchedule{
+    background-image: url('schedule8.jpg');
+    height: 600px;
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-color: lavender;
+}
+.listSchedule{
+    background-image: url('schedule6.png');
+    height: 600px;
+    background-position: right;
+    background-repeat: no-repeat;
+    background-color: lavender;
+
+}
+.schedule{
+    background-image: url('schedule3.jpg');
+    height: 600px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.message{
+    background-image: url('message8.jpg');
+    height: 600px;
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-color: lightblue;
+    
+}
+.listMessage{
+    background-image: url('message6.png');
+    height: 600px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: lavender;
+    
+}
+.viewMessage{
+    background-image: url('message9.jpg');
+    height: 600px;
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-color: lavender;
+    
+}
+.viewUser{
+
+    background-image: url('view.jpg');
+    background-size: cover; 
+    
+
+}
+
+.list{
+    
+    background-image: url('lg.jpg');
+    background-size: cover; 
+
+}

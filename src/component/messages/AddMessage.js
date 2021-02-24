@@ -2,118 +2,134 @@ import axios from 'axios';
 import React, { Component } from 'react';
 
 class AddMessage extends Component {
-    constructor(props) {
-        super(props)
-    
-        this.state = {
-          messageId:this.props.match.params.messageId,
-            message:"",
-            studentId:"",
-            createdByUserId:"",
-            createdDate:"",
-            messageError:"",
-            studentIdError:"",
-            userIdError:"",
-            dateError:""
+  constructor(props) {
+    super(props)
 
-        }
-        this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      messageId: this.props.match.params.messageId,
+      message: "",
+      studentId: "",
+      createdDate: "",
+      messageError: "",
+      studentIdError: "",
+      dateError: ""
+
     }
-    
-     handleSubmit = async (event) => {
-         event.preventDefault();
-    
-         let messageData = {
-           studentId: this.state.studentId,
-           message:this.state.message,
-           createdByUserId: this.state.createdByUserId,
-           createdDate: this.state.createdDate
-         };
-         console.log(messageData);
-         await axios.post("http://localhost:7171/api/addMessage",messageData)
-         
-         .then((data) => {
-           alert("Message Sent!");
-         })
-         this.props.history.push("/login/messages");         
-     }
-    cancel(){
-      this.props.history.push("/login/messages");
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-    render() {
-        return (
-            <form onSubmit={this.handleSubmit}>
-            <h1>
-              <span className="badge badge-dark">Send Message</span>
-            </h1>
-            <div className="form-group mr2">
-              <div className="alert-danger">{this.state.studentIdError}</div>
-              <label>Enter Student Id</label>
-              <input
-                type="number"
-                className="form-control"
-                id="studentId"
-                placeholder="Enter Student Id"
-                required
-                value={this.state.studentId}
-                onChange={(event) =>
-                  this.setState({ studentId: event.target.value })
-                }
-              />
-            </div>
-            <div className="form-group">
-              <div className="alert-danger">{this.state.messageError}</div>
-              <label>Enter Message:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="message"
-                placeholder="Enter Message"
-                required
-                value={this.state.message}
-                onChange={(event) =>
-                  this.setState({ message: event.target.value })
-                }
-              />
-            </div>
-            <div className="form-group">
-              <div className="alert-danger">{this.state.userIdError}</div>
-              <label>Enter Your User Id</label>
-              <input
-                type="number"
-                className="form-control"
-                id="createdByUserId"
-                placeholder="Enter Your User Id"
-                required
-                value={this.state.createdByUserId}
-                onChange={(event) =>
-                  this.setState({ createdByUserId: event.target.value })
-                }
-              />
-            </div>
-            <div className="form-group">
-              <div className="alert-danger">{this.state.dateError}</div>
-              <label>Select Date:</label>
-              <input
-                type="date"
-                className="form-control"
-                id="createdDate"
-                required
-                value={this.state.createdDate}
-                onChange={(event) =>
-                  this.setState({ createdDate: event.target.value })
-                }
-              />
-            </div>
-            <button type="submit" className="btn btn-success">
-              Send
-            </button>
-            <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>
-              Cancel
-            </button>
-          </form>
-        )
+  validate = () => {
+    let flag = true;
+    if (!this.state.studentId) {
+      flag = false;
+      this.setState({ studentIdError: "Student Id Is Required" });
+    } else {
+      this.setState({ studentIdError: "" });
     }
+    if (this.state.message === "") {
+      flag = false;
+      this.setState({ messageError: "Message Is Required" });
+    } else {
+      this.setState({ messageError: "" });
+    }
+    if (!this.state.createdDate) {
+      flag = false;
+      this.setState({ dateError: "Date Is Required" });
+    } else {
+      this.setState({ dateError: "" });
+    }
+    return flag;
+  }
+
+  handleSubmit = async (event) => {
+    event.preventDefault();
+    let isValid = this.validate();
+    if (!isValid) {
+      return false;
+    }
+    let messageData = {
+      studentId: this.state.studentId,
+      message: this.state.message,
+      createdDate: this.state.createdDate
+    };
+    console.log(messageData);
+    await axios.post("http://localhost:7171/api/addMessage", messageData)
+
+      .then((data) => {
+        alert("Message Sent!");
+      })
+    this.props.history.push("/login/messages");
+  }
+  cancel() {
+    this.props.history.push("/login/messages");
+  }
+  render() {
+    return (
+      <div className="message">
+        <div className="container">
+          <div className="row">
+            <div className="card col-md-6 offset-md-3 offset-md-3">
+              <h1 className="text-center">Send Message</h1>
+              <div className="card-body">
+                <form onSubmit={this.handleSubmit}>
+                  <div className="form-group mr2">
+                    <div className="alert-danger">{this.state.studentIdError}</div>
+                    <label>Enter Student Id</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="studentId"
+                      placeholder="Enter Student Id"
+                      required
+                      value={this.state.studentId}
+                      onChange={(event) =>
+                        this.setState({ studentId: event.target.value })
+                      }
+                    />
+                  </div>
+                  <div className="form-group">
+                    <div className="alert-danger">{this.state.messageError}</div>
+                    <label>Enter Message:</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="message"
+                      placeholder="Enter Message"
+                      required
+                      value={this.state.message}
+                      onChange={(event) =>
+                        this.setState({ message: event.target.value })
+                      }
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <div className="alert-danger">{this.state.dateError}</div>
+                    <label>Select Date:</label>
+                    <input
+                      type="date"
+                      className="form-control"
+                      id="createdDate"
+                      required
+                      value={this.state.createdDate}
+                      onChange={(event) =>
+                        this.setState({ createdDate: event.target.value })
+                      }
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-success">
+                    Send
+            </button>
+                  <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{ marginLeft: "10px" }}>
+                    Cancel
+            </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default AddMessage

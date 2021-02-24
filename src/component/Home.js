@@ -50,7 +50,7 @@ import ListOfAllStudent from './users/ListOfAllStudent';
 import ListOfAllAdmin from './users/ListOfAllAdmin';
 import ViewStudent from './users/ViewStudent';
 import ViewAdmin from './users/ViewAdmin';
-import UpdateAdmin from './users/UpdateStudent';
+import UpdateAdmin from './users/UpdateAdmin';
 import UpdateStudent from './users/UpdateStudent';
 import DeleteStudent from './users/DeleteStudent';
 import DeleteAdmin from './users/DeleteAdmin';
@@ -62,100 +62,100 @@ import ListOfAllCourses from './courses/ListOfAllCourses';
 import ListOfTrainer from './trainers/ListOfTrainer';
 import AddCourse from './courses/AddCourse';
 import AddTrainer from './trainers/AddTrainer';
+import ChooseTrainer from './trainers/ChooseTrainer';
+import RegisterTrainer from './trainers/RegisterTrainer';
+
+class Home extends Component {
+  render() {
+    return (
+      <div className="payment">
+        <Router>
+          <Navbar />
+          <Route exact path="/" component={Welcome}></Route>
+          <Route exact path="/contact" component={Contact}></Route>
+          <Route exact path="/about" component={About}></Route>
+          <Route exact path="/loginstudent" component={LoginStudent}></Route>
+          <Route exact path="/loginadmin" component={LoginAdmin}></Route>
+          <Route exact path="/registerstudent" component={RegistrationStudent}></Route>
+          <Route exact path="/registeradmin" component={RegistrationAdmin}></Route>
+          <Route exact path="/login/mainpagestudent" component={MainPageStudent}></Route>
+          <Route exact path="/login/mainpageadmin" component={MainPageAdmin}></Route>
+
+          <Route exact path="/enrollcourse" component={EnrollCourse}></Route>
+          <Route exact path="/choosecourse/:courseId" component={ChooseCourse}></Route>
+          <Route exact path="/listofcourse" component={ListOfAllCourses}></Route>
+          <Route exact path="/removecourse/:courseId" component={DeleteCourse}></Route>
+          <Route exact path="/viewcourse/:courseId" component={ViewCourse}></Route>
+          <Route exact path="/registercourse" component={AddCourse}></Route>
+          <Route exact path="/modifycourse/:courseId" component={UpdateCourse}></Route>
+
+          <Route exact path="/listoftrainer" component={ListOfTrainer}></Route>
+          <Route exact path="/viewtrainer/:trainerId" component={ViewTrainer}></Route>
+          <Route exact path="/registertrainer" component={AddTrainer}></Route>
+          <Route exact path="/modifytrainer/:trainerId" component={UpdateTrainer}></Route>
+          <Route exact path="/removetrainer/:trainerId" component={DeleteTrainer}></Route>
+          <Route exact path="/choosetrainer" component={ChooseTrainer}></Route>
+          <Route exact path="/enrolltrainer/:trainerId" component={RegisterTrainer}></Route>
+
+          <Route exact path="/login/listofallstudents" component={ListOfAllStudent}></Route>
+          <Route exact path="/login/listofalladmin" component={ListOfAllAdmin}></Route>
+          {/* <Route exact path="/modifystudent/:userId" component={UpdateStudent}></Route> */}
+          <Route exact path="/modifyadmin/:userId" component={UpdateAdmin}></Route>
+          <Route exact path="/viewstudent/:userId" component={ViewStudent}></Route>
+          <Route exact path="/viewadmin/:userId" component={ViewAdmin}></Route>
+          <Route exact path="/removestudent/:userId" component={DeleteStudent}></Route>
+          <Route exact path="/removeadmin/:userId" component={DeleteAdmin}></Route>
+
+          <Route exact path="/login/listofpayment" component={ListOfPayment}></Route>
+          <Route exact path="/login/listofpaymentstudent" component={ListOfPaymentStudent}></Route>
+          <Route exact path="/viewpayment/:paymentId" component={ViewPayment}></Route>
+          <Route exact path="/viewpaymentstudent/:paymentId" component={ViewPaymentStudent}></Route>
+          <Route exact path="/makepayment" component={AddPayment}></Route>
+
+          <Route exact path="/login/listofprogress" component={ViewProgressDetails}></Route>
+          <Route exact path="/login/listofprogressstudent" component={StudentProgressView}></Route>
+          <Route exact path="/viewprogress/:gradeId" component={DetailviewProgress}></Route>
+          <Route exact path="/viewprogressstudent/:gradeId" component={StudentViewProgressDetails}></Route>
+          <Route exact path="/modifyprogress/:gradeId" component={UpdateProgressDetails}></Route>
+          <Route exact path="/removeprogress/:gradeId" component={DeleteProgressDetails}></Route>
+          <Route exact path="/createprogress" component={AddProgressDetails}></Route>
+          <Route exact path="/viewpreviousprogress" component={PreviousProgressDetails}></Route>
 
 
- class Home extends Component {
-    render() {
-        return (
-            <div className="payment">
-            <Router>
-              <Navbar/>
-              <Route exact path="/" component={Welcome}></Route>
-              <Route exact path="/contact" component={Contact}></Route>
-              <Route exact path="/about" component={About}></Route>
-              <Route exact path="/loginstudent" component={LoginStudent}></Route>
-              <Route exact path ="/loginadmin" component={LoginAdmin}></Route>
-              <Route exact path="/registerstudent" component={RegistrationStudent}></Route>
-              <Route exact path="/registeradmin" component={RegistrationAdmin}></Route>
-              <Route exact path="/login/mainpagestudent" component={MainPageStudent}></Route>
-              <Route exact path="/login/mainpageadmin" component={MainPageAdmin}></Route>
- 
-             <Route exact path="/enrollcourse" component={EnrollCourse}></Route>
-             <Route exact path="/choosecourse/:courseId" component={ChooseCourse}></Route>
-            <Route exact path="/listofcourse" component={ListOfAllCourses}></Route>
-             <Route exact path="/removecourse/:courseId" component={DeleteCourse}></Route>
-             <Route exact path="/viewcourse/:courseId" component={ViewCourse}></Route>
-             <Route exact path="/registercourse" component={AddCourse}></Route>
-             {/* <Route exact path="/updatecourse" component={UpdateCourse}></Route> */}
-             <Route exact path="/modifycourse/:courseId" component={UpdateCourse}></Route>
 
-             <Route exact path="/listoftrainer" component={ListOfTrainer}></Route>
-             <Route exact path="/viewtrainer/:trainerId" component={ViewTrainer}></Route>
-             <Route exact path="/registertrainer" component={AddTrainer}></Route>
-             <Route exact path="/modifytrainer/:trainerId" component={UpdateTrainer}></Route>
-             <Route exact path="/removetrainer/:trainerId" component={DeleteTrainer}></Route>
+          <Route exact path="/login/trainingschedulestudent" component={ListOfScheduleStudent}></Route>
+          <Route exact path="/login/trainingschedule" component={ListOfTrainingSchedule}></Route>
+          <Route exact path="/trainingschedule/modifyschedule/:scheduleId" component={UpdateTrainingSchedule}></Route>
+          <Route exact path="/trainingschedule/createschedule" component={AddTrainingSchedule}></Route>
+          <Route exact path="/trainingschedule/removeschedule/:scheduleId" component={DeleteTrainingSchedule}></Route>
+          <Route exact path="/trainingschedule/viewschedule/:scheduleId" component={ViewTrainingSchedule}></Route>
+          <Route exact path="/trainingschedule/viewscheduleStudent/:scheduleId" component={ViewTrainingScheduleStudent}></Route>
 
-             <Route exact path ="/login/listofallstudents" component={ListOfAllStudent}></Route>
-             <Route exact path ="/login/listofalladmin" component={ListOfAllAdmin}></Route>
-             <Route exact path ="/modifystudent/:userId" component={UpdateStudent}></Route>
-             <Route exact path ="/modifyadmin/:userId" component={UpdateAdmin}></Route>
-             <Route exact path="/viewstudent/:userId" component={ViewStudent}></Route>
-             <Route exact path="/viewadmin/:userId" component={ViewAdmin}></Route>
-             <Route exact path="/removestudent/:userId" component={DeleteStudent}></Route>
-             <Route exact path="/removeadmin/:userId" component={DeleteAdmin}></Route>
-
-             <Route exact path="/login/listofpayment" component={ListOfPayment}></Route>
-             <Route exact path="/login/listofpaymentstudent" component={ListOfPaymentStudent}></Route>
-             <Route exact path="/viewpayment/:paymentId" component={ViewPayment}></Route>
-             <Route exact path="/viewpaymentstudent/:paymentId" component={ViewPaymentStudent}></Route>
-             <Route exact path="/makepayment" component={AddPayment}></Route>
-
-             <Route exact path="/login/listofprogress" component = {ViewProgressDetails}></Route>
-             <Route exact path="/login/listofprogressstudent" component = {StudentProgressView}></Route>
-             <Route exact path="/viewprogress/:gradeId" component ={DetailviewProgress}></Route>
-             <Route exact path ="/viewprogressstudent/:gradeId" component={StudentViewProgressDetails}></Route>
-             <Route exact path ="/modifyprogress/:gradeId" component={UpdateProgressDetails}></Route>
-             <Route exact path ="/removeprogress/:gradeId" component={DeleteProgressDetails}></Route>
-             <Route exact path ="/createprogress" component={AddProgressDetails}></Route>
-             <Route exact path ="/viewpreviousprogress" component={PreviousProgressDetails}></Route>
-
-             
-
-             <Route exact path="/login/trainingschedulestudent" component={ListOfScheduleStudent}></Route>
-             <Route exact path ="/login/trainingschedule" component={ListOfTrainingSchedule}></Route>
-             <Route exact path="/trainingschedule/modifyschedule/:scheduleId" component={UpdateTrainingSchedule}></Route>
-             <Route exact path="/trainingschedule/createschedule" component={AddTrainingSchedule}></Route>
-             <Route exact path="/trainingschedule/removeschedule/:scheduleId" component={DeleteTrainingSchedule}></Route>
-             <Route exact path="/trainingschedule/viewschedule/:scheduleId" component={ViewTrainingSchedule}></Route>
-             <Route exact path="/trainingschedule/viewscheduleStudent/:scheduleId" component={ViewTrainingScheduleStudent}></Route>
-
-             <Route exact path="/login/messagesstudent" component={ListOfMessagesStudent}></Route>
-             <Route exact path="/login/messages" component={ListOfMessages}></Route>
-             <Route exact path = "/messages/viewmessage/:messageId" component={ViewMessage}></Route>
-             <Route exact path = "/messages/viewmessageStudent/:messageId" component={ViewMessageStudent}></Route>
-             <Route exact path="/message/sendmessage" component={AddMessage}></Route>
-             <Route exact path="/message/sendmessagestudent" component={AddMessageStudent}></Route>
-             <Route exact path="/message/removemessage/:messageId" component={DeleteMessage}></Route>
-            <Route exact path = "/messages/modifymessage/:messageId" component={UpdateMessage}></Route>
+          <Route exact path="/login/messagesstudent" component={ListOfMessagesStudent}></Route>
+          <Route exact path="/login/messages" component={ListOfMessages}></Route>
+          <Route exact path="/messages/viewmessage/:messageId" component={ViewMessage}></Route>
+          <Route exact path="/messages/viewmessageStudent/:messageId" component={ViewMessageStudent}></Route>
+          <Route exact path="/message/sendmessage" component={AddMessage}></Route>
+          <Route exact path="/message/sendmessagestudent" component={AddMessageStudent}></Route>
+          <Route exact path="/message/removemessage/:messageId" component={DeleteMessage}></Route>
+          <Route exact path="/messages/modifymessage/:messageId" component={UpdateMessage}></Route>
 
 
-             <Route exact path="/login/enroll/payment/" component={AddPayment}></Route>
-
-             {/* <Route exact path="/login/enroll/payment/" component={AddPayment}></Route> */}
-             {/* <Route exact path="/login/enroll/payment/course" component={AddCourse}></Route> */}
-             {/* <Route exact path="/enrollcourse" component={EnrollCourse}></Route>
+          {/* <Route exact path="/login/enroll/payment/" component={AddPayment}></Route>
+             <Route exact path="/login/enroll/payment/course" component={AddCourse}></Route>  */}
+          {/* <Route exact path="/enrollcourse" component={EnrollCourse}></Route>
              <Route exact path="/chooseCourse/:courseId" component={ChooseCourse}></Route>
              <Route exact path ="/viewCourse" component={ViewCourse}></Route>
              <Route exact path="/viewTrainer/:trainerId" component={ViewTrainer}></Route>
-             <Route exact path="/listofcourse" component={ListOfAllCourses}></Route>
-             <Route exact path="/viewcourse/:courseId" component={ViewCourse}></Route>
+             {/* <Route exact path="/listofcourse" component={ListOfAllCourses}></Route> */}
+          {/* <Route exact path="/viewcourse/:courseId" component={ViewCourse}></Route>
              <Route exact path="/listoftrainer" component={ListOfTrainer}></Route>
              <Route exact path="/addcourse" component={AddCourse}></Route>
              <Route exact path="/addtrainer" component={AddTrainer}></Route> */}
 
-            </Router>
-          </div>
-        )
-    }
+        </Router>
+      </div>
+    )
+  }
 }
 export default Home;

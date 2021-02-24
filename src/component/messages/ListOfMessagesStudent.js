@@ -29,7 +29,7 @@ class ListOfMessagesStudent extends Component {
 
     render() {
         return (
-            <div>
+            <div className="listMessage">
                  <h2 className="text-center">Messages List</h2>
                  <div className = "row">
                     <Link 
@@ -45,7 +45,7 @@ class ListOfMessagesStudent extends Component {
 
                             <thead>
                                 <tr>
-                                    <th> Student Id </th>
+                                    {/* <th> Student Id </th> */}
                                     <th> Message </th>
                                     <th> Date </th>
                                     <th></th>
@@ -56,7 +56,7 @@ class ListOfMessagesStudent extends Component {
                                     this.state.messages.map(
                                          message => 
                                          <tr key = {message.messageId}>
-                                              <td> {message.studentId} </td>   
+                                              {/* <td> {message.studentId} </td>    */}
                                               <td> {message.message}</td>
                                               <td> {message.createdDate}</td>
                     
